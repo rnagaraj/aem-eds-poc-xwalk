@@ -1,6 +1,8 @@
 {
   "mappings": [
-    "/content/aem-eds-poc-xwalk/:/"
+    "/content/aem-eds-poc-xwalk/:/",
+    "/content/aem-eds-poc-xwalk/configuration:./helix/config.json",
+    "/content/aem-eds-poc-xwalk/metadata:/metadata.json"
   ],
   "includes": [
     "/content/aem-eds-poc-xwalk/"
