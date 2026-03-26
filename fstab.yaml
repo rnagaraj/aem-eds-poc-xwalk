@@ -1,5 +1,4 @@
 mountpoints:
   /:
-    url: "https://author-p57723-e572978.adobeaemcloud.com/bin/franklin.delivery/rnagaraj/aem-eds-poc-xwalk/main"
+    url: "https://author-p57723-e572978.adobeaemcloud.com"
     type: "markup"
-    suffix: ".html"
