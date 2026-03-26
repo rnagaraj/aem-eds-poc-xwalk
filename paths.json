@@ -1,8 +1,0 @@
-{
-  "mappings": [
-    "/content/aem-eds-poc-xwalk/:/"
-  ],
-  "includes": [
-    "/content/aem-eds-poc-xwalk/"
-  ]
-}
