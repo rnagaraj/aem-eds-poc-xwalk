@@ -1,10 +1,5 @@
 {
-  "name": "@adobe/helix-html2md-tool",
-  "version": "1.0.0",
-  "description": "HTML to Markdown conversion tool for Sidekick",
-  "license": "Apache-2.0",
-  "type": "module",
-  "dependencies": {
-    "@adobe/helix-html2md": "^3.0.0"
-  }
+  "name": "html2md",
+  "private": true,
+  "type": "module"
 }
