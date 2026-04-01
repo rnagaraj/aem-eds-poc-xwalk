@@ -186,9 +186,9 @@
       },
       {
         "component": "text",
-        "name": "ctaText",
+        "name": "ctaLabel",
         "value": "",
-        "label": "CTA Text",
+        "label": "CTA Label",
         "valueType": "string"
       },
       {
