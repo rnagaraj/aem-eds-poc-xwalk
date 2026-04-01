@@ -97,11 +97,18 @@ export default function decorate(block) {
     const body = document.createElement('div');
     body.className = 'cards-card-body';
 
-    if (bodyCols.length >= 4) {
-      // Structured model: eyebrow | title | description | ctaText | ctaUrl | [ctaStyle]
-      const [eyebrowCol, titleCol, descCol, ctaTextCol, ctaUrlCol, ctaStyleCol] = bodyCols;
+    const getCol = (prop) => bodyCols.find((c) => c.dataset.aueProp === prop);
 
-      const eyebrowText = eyebrowCol.textContent.trim();
+    if (getCol('eyebrow') || getCol('title') || getCol('description') || getCol('ctaLabel')) {
+      // Structured model: identified by data-aue-prop attributes
+      const eyebrowCol = getCol('eyebrow');
+      const titleCol = getCol('title');
+      const descCol = getCol('description');
+      const ctaLabelCol = getCol('ctaLabel');
+      const ctaUrlCol = getCol('ctaUrl');
+      const ctaStyleCol = getCol('ctaStyle');
+
+      const eyebrowText = eyebrowCol ? eyebrowCol.textContent.trim() : '';
       if (eyebrowText) {
         const eyebrowDiv = document.createElement('div');
         eyebrowDiv.className = 'cards-card-eyebrow';
@@ -111,7 +118,7 @@ export default function decorate(block) {
         body.append(eyebrowDiv);
       }
 
-      const titleText = titleCol.textContent.trim();
+      const titleText = titleCol ? titleCol.textContent.trim() : '';
       if (titleText) {
         const titleDiv = document.createElement('div');
         titleDiv.className = 'cards-card-title';
@@ -121,16 +128,16 @@ export default function decorate(block) {
         body.append(titleDiv);
       }
 
-      if (descCol.children.length) {
+      if (descCol && descCol.children.length) {
         const descDiv = document.createElement('div');
         descDiv.className = 'cards-card-description';
         while (descCol.firstChild) descDiv.append(descCol.firstChild);
         body.append(descDiv);
       }
 
-      const ctaText = ctaTextCol ? ctaTextCol.textContent.trim() : '';
+      const ctaLabel = ctaLabelCol ? ctaLabelCol.textContent.trim() : '';
       const ctaUrl = ctaUrlCol ? ctaUrlCol.textContent.trim() : '';
-      if (ctaText && ctaUrl) {
+      if (ctaLabel && ctaUrl) {
         const validStyles = ['primary', 'secondary', 'tertiary'];
         const rawStyle = ctaStyleCol ? ctaStyleCol.textContent.trim() : '';
         const ctaStyle = validStyles.includes(rawStyle) ? rawStyle : 'primary';
@@ -138,7 +145,7 @@ export default function decorate(block) {
         ctaDiv.className = 'cards-card-cta';
         const a = document.createElement('a');
         a.href = ctaUrl;
-        a.textContent = ctaText;
+        a.textContent = ctaLabel;
         a.classList.add('cards-cta-btn', `cards-cta-${ctaStyle}`);
         ctaDiv.append(a);
         body.append(ctaDiv);
