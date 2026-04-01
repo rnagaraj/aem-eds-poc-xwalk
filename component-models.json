@@ -164,11 +164,60 @@
         "multi": false
       },
       {
-        "component": "richtext",
-        "name": "text",
+        "component": "text",
+        "name": "eyebrow",
         "value": "",
-        "label": "Text",
+        "label": "Eyebrow",
         "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "title",
+        "value": "",
+        "label": "Title",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "description",
+        "value": "",
+        "label": "Description",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "ctaText",
+        "value": "",
+        "label": "CTA Text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "ctaUrl",
+        "value": "",
+        "label": "CTA URL",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "ctaStyle",
+        "value": "primary",
+        "label": "CTA Style",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Primary (Blue Pill)",
+            "value": "primary"
+          },
+          {
+            "name": "Secondary (Yellow Pill)",
+            "value": "secondary"
+          },
+          {
+            "name": "Tertiary (Underlined Text)",
+            "value": "tertiary"
+          }
+        ]
       }
     ]
   },
