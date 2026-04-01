@@ -100,10 +100,6 @@
   align-items: center;
 }
 
-.cards .cards-card-description p:last-child {
-  margin-bottom: 0;
-}
-
 .cards .cards-card-cta p {
   margin: 0;
   display: flex;
