@@ -97,16 +97,18 @@ export default function decorate(block) {
     const body = document.createElement('div');
     body.className = 'cards-card-body';
 
-    const getCol = (prop) => bodyCols.find((c) => c.dataset.aueProp === prop);
+    const getCol = (prop, index) => bodyCols.find((c) => c.dataset.aueProp === prop)
+      || (bodyCols[index] && !bodyCols[index].dataset.aueProp ? bodyCols[index] : null);
 
-    if (getCol('eyebrow') || getCol('title') || getCol('description') || getCol('ctaLabel')) {
-      // Structured model: identified by data-aue-prop attributes
-      const eyebrowCol = getCol('eyebrow');
-      const titleCol = getCol('title');
-      const descCol = getCol('description');
-      const ctaLabelCol = getCol('ctaLabel');
-      const ctaUrlCol = getCol('ctaUrl');
-      const ctaStyleCol = getCol('ctaStyle');
+    if (bodyCols.length >= 2) {
+      // Structured model: eyebrow | title | description | ctaLabel | ctaUrl | ctaStyle
+      // Columns identified by data-aue-prop in UE, by position on live page
+      const eyebrowCol = getCol('eyebrow', 0);
+      const titleCol = getCol('title', 1);
+      const descCol = getCol('description', 2);
+      const ctaLabelCol = getCol('ctaLabel', 3);
+      const ctaUrlCol = getCol('ctaUrl', 4);
+      const ctaStyleCol = getCol('ctaStyle', 5);
 
       const eyebrowText = eyebrowCol ? eyebrowCol.textContent.trim() : '';
       if (eyebrowText) {
@@ -150,46 +152,6 @@ export default function decorate(block) {
         ctaDiv.append(a);
         body.append(ctaDiv);
       }
-    } else if (bodyCols.length > 1) {
-      // Semi-structured: eyebrow | title | richtext (old 4-cell model)
-      const [eyebrowCol, titleCol, ...textCols] = bodyCols;
-
-      const eyebrowText = eyebrowCol.textContent.trim();
-      if (eyebrowText) {
-        const eyebrowDiv = document.createElement('div');
-        eyebrowDiv.className = 'cards-card-eyebrow';
-        const p = document.createElement('p');
-        p.textContent = eyebrowText;
-        eyebrowDiv.append(p);
-        body.append(eyebrowDiv);
-      }
-
-      const titleText = titleCol.textContent.trim();
-      if (titleText) {
-        const titleDiv = document.createElement('div');
-        titleDiv.className = 'cards-card-title';
-        const h3 = document.createElement('h3');
-        h3.textContent = titleText;
-        titleDiv.append(h3);
-        body.append(titleDiv);
-      }
-
-      textCols.forEach((col) => {
-        const descDiv = document.createElement('div');
-        descDiv.className = 'cards-card-description';
-        const ctaDiv = document.createElement('div');
-        ctaDiv.className = 'cards-card-cta';
-        [...col.children].forEach((el) => {
-          if (el.querySelector('a')) {
-            [...el.querySelectorAll('a')].forEach(decorateCtaLink);
-            ctaDiv.append(el);
-          } else {
-            descDiv.append(el);
-          }
-        });
-        if (descDiv.children.length) body.append(descDiv);
-        if (ctaDiv.children.length) body.append(ctaDiv);
-      });
     } else if (bodyCols.length === 1) {
       // Legacy: single richtext col with all content
       decorateCardBody(bodyCols[0]);
