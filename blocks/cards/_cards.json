@@ -56,67 +56,25 @@
           "multi": false
         },
         {
-          "component": "collapse",
-          "name": "content",
-          "label": "Content"
-        },
-        {
           "component": "text",
           "name": "eyebrow",
           "value": "",
           "label": "Eyebrow",
-          "valueType": "string",
-          "collapsible": "content"
+          "valueType": "string"
         },
         {
           "component": "text",
           "name": "title",
           "value": "",
           "label": "Title",
-          "valueType": "string",
-          "collapsible": "content"
+          "valueType": "string"
         },
         {
           "component": "richtext",
-          "name": "description",
+          "name": "text",
           "value": "",
-          "label": "Description",
-          "valueType": "string",
-          "collapsible": "content"
-        },
-        {
-          "component": "collapse",
-          "name": "cta",
-          "label": "CTA"
-        },
-        {
-          "component": "text",
-          "name": "ctaText",
-          "value": "",
-          "label": "CTA Text",
-          "valueType": "string",
-          "collapsible": "cta"
-        },
-        {
-          "component": "text",
-          "name": "ctaUrl",
-          "value": "",
-          "label": "CTA URL",
-          "valueType": "string",
-          "collapsible": "cta"
-        },
-        {
-          "component": "select",
-          "name": "ctaStyle",
-          "value": "primary",
-          "label": "CTA Style",
-          "valueType": "string",
-          "collapsible": "cta",
-          "options": [
-            { "name": "Primary (Blue Pill)", "value": "primary" },
-            { "name": "Secondary (Yellow Pill)", "value": "secondary" },
-            { "name": "Tertiary (Underlined Text)", "value": "tertiary" }
-          ]
+          "label": "Text",
+          "valueType": "string"
         }
       ]
     }

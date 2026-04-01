@@ -1,6 +1,38 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
+function decorateRichTextCol(col, body) {
+  const descWrapper = document.createElement('div');
+  descWrapper.className = 'cards-card-description';
+  const ctaWrapper = document.createElement('div');
+  ctaWrapper.className = 'cards-card-cta';
+
+  [...col.children].forEach((el) => {
+    const hasLinks = el.querySelector('a');
+    if (hasLinks) {
+      [...el.querySelectorAll('a')].forEach((link) => {
+        const strongParent = link.closest('strong');
+        const emParent = link.closest('em');
+        let style = 'tertiary';
+        if (strongParent) {
+          style = 'primary';
+          strongParent.replaceWith(link);
+        } else if (emParent) {
+          style = 'secondary';
+          emParent.replaceWith(link);
+        }
+        link.classList.add('cards-cta-btn', `cards-cta-${style}`);
+      });
+      ctaWrapper.append(el);
+    } else {
+      descWrapper.append(el);
+    }
+  });
+
+  if (descWrapper.children.length) body.append(descWrapper);
+  if (ctaWrapper.children.length) body.append(ctaWrapper);
+}
+
 function decorateCardBody(body) {
   const children = [...body.children];
 
@@ -71,14 +103,51 @@ export default function decorate(block) {
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
     moveInstrumentation(row, li);
-    while (row.firstElementChild) li.append(row.firstElementChild);
-    [...li.children].forEach((div) => {
-      if (div.children.length === 1 && div.querySelector('picture')) div.className = 'cards-card-image';
-      else {
-        div.className = 'cards-card-body';
-        decorateCardBody(div);
+
+    const cols = [...row.children];
+    const imageCol = cols.find((c) => c.querySelector('picture'));
+    const bodyCols = cols.filter((c) => !c.querySelector('picture'));
+
+    if (imageCol) {
+      imageCol.className = 'cards-card-image';
+      li.append(imageCol);
+    }
+
+    const body = document.createElement('div');
+    body.className = 'cards-card-body';
+
+    if (bodyCols.length > 1) {
+      // Structured model: eyebrow col, title col, richtext col
+      const [eyebrowCol, titleCol, ...textCols] = bodyCols;
+
+      const eyebrowText = eyebrowCol.textContent.trim();
+      if (eyebrowText) {
+        const eyebrowDiv = document.createElement('div');
+        eyebrowDiv.className = 'cards-card-eyebrow';
+        const p = document.createElement('p');
+        p.textContent = eyebrowText;
+        eyebrowDiv.append(p);
+        body.append(eyebrowDiv);
       }
-    });
+
+      const titleText = titleCol.textContent.trim();
+      if (titleText) {
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'cards-card-title';
+        const h3 = document.createElement('h3');
+        h3.textContent = titleText;
+        titleDiv.append(h3);
+        body.append(titleDiv);
+      }
+
+      textCols.forEach((col) => decorateRichTextCol(col, body));
+    } else if (bodyCols.length === 1) {
+      // Legacy model: single richtext col with all content
+      decorateCardBody(bodyCols[0]);
+      while (bodyCols[0].firstChild) body.append(bodyCols[0].firstChild);
+    }
+
+    li.append(body);
     ul.append(li);
   });
   ul.querySelectorAll('picture > img').forEach((img) => {
