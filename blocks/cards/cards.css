@@ -91,10 +91,6 @@
   color: var(--text-color);
 }
 
-.cards .cards-card-description p:last-child {
-  margin-bottom: 0;
-}
-
 /* CTA container */
 .cards .cards-card-cta {
   margin-top: auto;
@@ -102,6 +98,10 @@
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
+}
+
+.cards .cards-card-description p:last-child {
+  margin-bottom: 0;
 }
 
 .cards .cards-card-cta p {
