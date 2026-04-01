@@ -1,6 +1,30 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
+function decorateCtaLink(link) {
+  const strongParent = link.closest('strong');
+  const emParent = link.closest('em');
+  const strongChild = link.querySelector('strong');
+  const emChild = link.querySelector('em');
+  let style = 'tertiary';
+  if (strongParent) {
+    style = 'primary';
+    strongParent.replaceWith(link);
+  } else if (strongChild) {
+    style = 'primary';
+    strongChild.replaceWith(...strongChild.childNodes);
+  } else if (emParent) {
+    style = 'secondary';
+    emParent.replaceWith(link);
+  } else if (emChild) {
+    style = 'secondary';
+    emChild.replaceWith(...emChild.childNodes);
+  }
+  link.classList.remove('button');
+  link.classList.add('cards-cta-btn', `cards-cta-${style}`);
+  link.querySelectorAll('u').forEach((u) => u.replaceWith(...u.childNodes));
+}
+
 function decorateRichTextCol(col, body) {
   const descWrapper = document.createElement('div');
   descWrapper.className = 'cards-card-description';
@@ -8,21 +32,8 @@ function decorateRichTextCol(col, body) {
   ctaWrapper.className = 'cards-card-cta';
 
   [...col.children].forEach((el) => {
-    const hasLinks = el.querySelector('a');
-    if (hasLinks) {
-      [...el.querySelectorAll('a')].forEach((link) => {
-        const strongParent = link.closest('strong');
-        const emParent = link.closest('em');
-        let style = 'tertiary';
-        if (strongParent) {
-          style = 'primary';
-          strongParent.replaceWith(link);
-        } else if (emParent) {
-          style = 'secondary';
-          emParent.replaceWith(link);
-        }
-        link.classList.add('cards-cta-btn', `cards-cta-${style}`);
-      });
+    if (el.querySelector('a')) {
+      [...el.querySelectorAll('a')].forEach(decorateCtaLink);
       ctaWrapper.append(el);
     } else {
       descWrapper.append(el);
@@ -59,19 +70,7 @@ function decorateCardBody(body) {
       titleWrapper.append(el);
       titleFound = true;
     } else if (hasLinks) {
-      [...el.querySelectorAll('a')].forEach((link) => {
-        const strongParent = link.closest('strong');
-        const emParent = link.closest('em');
-        let style = 'tertiary';
-        if (strongParent) {
-          style = 'primary';
-          strongParent.replaceWith(link);
-        } else if (emParent) {
-          style = 'secondary';
-          emParent.replaceWith(link);
-        }
-        link.classList.add('cards-cta-btn', `cards-cta-${style}`);
-      });
+      [...el.querySelectorAll('a')].forEach(decorateCtaLink);
       ctaWrapper.append(el);
     } else {
       descWrapper.append(el);

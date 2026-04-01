@@ -108,6 +108,11 @@
   align-items: center;
 }
 
+/* Reset AEM default button decoration on all card CTAs */
+.cards .cards-card-cta .button-container {
+  margin: 0;
+}
+
 /* Shared CTA button base */
 .cards .cards-cta-btn {
   display: inline-block;
