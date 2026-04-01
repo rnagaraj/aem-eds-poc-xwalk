@@ -57,6 +57,13 @@
         },
         {
           "component": "text",
+          "name": "eyebrow",
+          "value": "",
+          "label": "Eyebrow",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
           "name": "title",
           "value": "",
           "label": "Title",
