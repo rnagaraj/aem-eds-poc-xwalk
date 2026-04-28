@@ -6,6 +6,7 @@ import {
   decorateSections,
   decorateBlocks,
   decorateTemplateAndTheme,
+  getMetadata,
   waitForFirstImage,
   loadSection,
   loadSections,
@@ -92,6 +93,17 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+
+  const template = getMetadata('template');
+  if (template) {
+    loadCSS(`${window.hlx.codeBasePath}/templates/${template}/${template}.css`);
+  }
+
+  const theme = getMetadata('theme');
+  if (theme) {
+    loadCSS(`${window.hlx.codeBasePath}/styles/themes/${theme}.css`);
+  }
+
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);
