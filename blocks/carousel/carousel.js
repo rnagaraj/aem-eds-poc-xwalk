@@ -95,26 +95,15 @@ export default function decorate(block) {
   const slides = [...track.children];
   const total = slides.length;
   let current = 0;
+  let dots = [];
 
-  // dot indicators
-  const dotsNav = document.createElement('div');
-  dotsNav.className = 'carousel-dots';
-  const dots = slides.map((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'carousel-dot';
-    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-    dot.addEventListener('click', () => goTo(i));
-    dotsNav.append(dot);
-    return dot;
-  });
-
-  function goTo(index) {
+  const goTo = (index) => {
     slides[current].classList.remove('active');
     dots[current].classList.remove('active');
     current = (index + total) % total;
     slides[current].classList.add('active');
     dots[current].classList.add('active');
-  }
+  };
 
   // prev/next buttons
   const prevBtn = document.createElement('button');
@@ -128,6 +117,18 @@ export default function decorate(block) {
   nextBtn.setAttribute('aria-label', 'Next slide');
   nextBtn.innerHTML = '&#8250;';
   nextBtn.addEventListener('click', () => goTo(current + 1));
+
+  // dot indicators
+  const dotsNav = document.createElement('div');
+  dotsNav.className = 'carousel-dots';
+  dots = slides.map((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot';
+    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+    dot.addEventListener('click', () => goTo(i));
+    dotsNav.append(dot);
+    return dot;
+  });
 
   // activate first slide
   slides[0].classList.add('active');
