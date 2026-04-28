@@ -1,0 +1,30 @@
+/* ── Dark (Night) Theme ─────────────────────────────── */
+body.dark {
+  --background-color: #0f1117;
+  --light-color: #1c1f2b;
+  --dark-color: #a0abbe;
+  --text-color: #e8ecf4;
+  --link-color: #60a5fa;
+  --link-hover-color: #93c5fd;
+
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Surfaces */
+body.dark header {
+  background-color: #161a26;
+  border-bottom: 1px solid #2a2f42;
+}
+
+body.dark footer {
+  background-color: #161a26;
+  border-top: 1px solid #2a2f42;
+}
+
+/* Cards / bordered blocks */
+body.dark .carousel-slide,
+body.dark .cards-card {
+  background-color: var(--light-color);
+  border-color: #2a2f42;
+}

@@ -1,0 +1,32 @@
+/* ── White (Day) Theme ──────────────────────────────── */
+body.white {
+  --background-color: #ffffff;
+  --light-color: #f4f6fa;
+  --dark-color: #505050;
+  --text-color: #131313;
+  --link-color: #0057b8;
+  --link-hover-color: #003f8a;
+
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Surfaces */
+body.white header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e4ed;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+body.white footer {
+  background-color: #f4f6fa;
+  border-top: 1px solid #e0e4ed;
+}
+
+/* Cards / bordered blocks */
+body.white .carousel-slide,
+body.white .cards-card {
+  background-color: #ffffff;
+  border-color: #e0e4ed;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
