@@ -58,7 +58,7 @@
 }
 
 /* Description paragraphs */
-.hero-split-content p:not(.hero-split-eyebrow):not(.hero-split-ctas) {
+.hero-split-content p:not(.hero-split-eyebrow, .hero-split-ctas) {
   margin: 0 0 20px;
   font-size: var(--body-font-size-s);
   line-height: 1.7;
