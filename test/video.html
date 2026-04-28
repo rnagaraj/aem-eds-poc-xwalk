@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Video Block - Local Test</title>
+  <link rel="stylesheet" href="/styles/styles.css">
+  <script src="/scripts/aem.js" type="module"></script>
+  <script src="/scripts/scripts.js" type="module"></script>
+</head>
+<body>
+  <header></header>
+  <main>
+    <div>
+      <div class="video">
+
+        <!--
+          Row 1: video URL. Switch the href below to test each source type:
+
+          YouTube:
+            https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+          Vimeo:
+            https://vimeo.com/123456789
+
+          AEM DAM (direct video file from AEM):
+            /content/dam/my-project/videos/sample.mp4
+
+          Scene7 direct asset:
+            https://s7g10.scene7.com/is/content/mycompany/sample-video
+
+          Scene7 viewer (iframe):
+            https://s7g10.scene7.com/s7viewers/html5/VideoViewer.html?asset=mycompany/sample-video&serverurl=https://s7g10.scene7.com
+        -->
+        <div>
+          <div><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">https://www.youtube.com/watch?v=dQw4w9WgXcQ</a></div>
+        </div>
+
+        <!--
+          Row 2: transcript rich text content.
+          In AEM this would be a rich text cell authored in the document.
+        -->
+        <div>
+          <div>
+            <p>[00:00] Welcome to this introduction to Adobe Experience Manager Edge Delivery Services.</p>
+            <p>[00:08] In this video, we will walk through how to set up your first EDS project from scratch.</p>
+            <p>[00:17] Edge Delivery Services combines the power of document-based authoring with the performance of edge computing.</p>
+            <p>[00:29] Authors can work in familiar tools like Microsoft Word or Google Docs, while developers build blocks using plain HTML, CSS, and JavaScript.</p>
+            <p>[00:45] Let us start by looking at the project structure and how blocks are loaded on the page.</p>
+            <p>[01:02] Every block follows the same pattern — a decorate function receives the block DOM element and transforms it into the final UI.</p>
+            <p>[01:18] This keeps the authoring experience simple and the developer experience flexible.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+  <footer></footer>
+</body>
+</html>

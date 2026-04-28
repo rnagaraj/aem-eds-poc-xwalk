@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Journey Block - Local Test</title>
+  <link rel="stylesheet" href="/styles/styles.css">
+  <script src="/scripts/aem.js" type="module"></script>
+  <script src="/scripts/scripts.js" type="module"></script>
+</head>
+<body>
+  <header></header>
+  <main>
+    <div>
+      <h2 style="padding:0 24px">User Journey — Click the $ pins</h2>
+
+      <!--
+        journey block:
+        Each row = one step with 4 columns:
+          Col 1: illustration image
+          Col 2: description text
+          Col 3: benefit label  (leave empty = no $ pin)
+          Col 4: benefit amount (leave empty = no $ pin)
+      -->
+      <div class="journey">
+
+        <!-- Step 1: no $ pin -->
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Jesse on a bicycle"></picture></div>
+          <div><p>Jesse was seriously injured in a bike accident.</p></div>
+          <div></div>
+          <div></div>
+        </div>
+
+        <!-- Step 2: $ pin -->
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Ambulance"></picture></div>
+          <div><p>An ambulance rushed him to the hospital.</p></div>
+          <div>Transportation to hospital</div>
+          <div>$300</div>
+        </div>
+
+        <!-- Step 3: $ pin -->
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Emergency room"></picture></div>
+          <div><p>He was evaluated for multiple injuries.</p></div>
+          <div>Emergency room visit</div>
+          <div>$150</div>
+        </div>
+
+        <!-- Step 4: $ pin -->
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Diagnostic tests"></picture></div>
+          <div><p>Jesse underwent advanced diagnostic tests.</p></div>
+          <div>Medical testing</div>
+          <div>$200</div>
+        </div>
+
+        <!-- Step 5: $ pin -->
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Doctor"></picture></div>
+          <div><p>The doctor diagnosed a concussion.</p></div>
+          <div>Concussion injury</div>
+          <div>$400</div>
+        </div>
+
+        <!-- Step 6: no $ pin -->
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Recovery"></picture></div>
+          <div><p>Click on each pin to see the benefit payment.</p></div>
+          <div></div>
+          <div></div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+  <footer></footer>
+</body>
+</html>

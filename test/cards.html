@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cards Block - Local Test</title>
+  <link rel="stylesheet" href="/styles/styles.css">
+  <script src="/scripts/aem.js" type="module"></script>
+  <script src="/scripts/scripts.js" type="module"></script>
+</head>
+<body>
+  <header></header>
+  <main>
+    <div>
+      <!--
+        This structure mirrors what AEM EDS generates from a document.
+        The outer div becomes a "section", the inner div with class "cards"
+        is picked up by decorateBlocks() and your cards.js decorate() is called.
+
+        Two-column structured model (eyebrow | title | description | ctaLabel | ctaUrl | ctaStyle):
+      -->
+      <div class="cards">
+
+          <!-- Card 1 -->
+          <div>
+            <div><picture><img src="/test/placeholder.svg" alt="Card image 1"></picture></div>
+            <div>Technology</div>
+            <div>Getting Started with AEM EDS</div>
+            <div><p>Learn how to build fast, author-friendly sites using Adobe Experience Manager Edge Delivery Services.</p></div>
+            <div>Read More</div>
+            <div>https://www.adobe.com</div>
+            <div>primary</div>
+          </div>
+
+          <!-- Card 2 -->
+          <div>
+            <div><picture><img src="/test/placeholder.svg" alt="Card image 2"></picture></div>
+            <div>Design</div>
+            <div>Styling Your Blocks</div>
+            <div><p>Explore how CSS custom properties enable per-site theming without touching component code.</p></div>
+            <div>Learn More</div>
+            <div>https://www.adobe.com</div>
+            <div>secondary</div>
+          </div>
+
+          <!-- Card 3 - no image (empty eyebrow div keeps column positions aligned) -->
+          <div>
+            <div></div>
+            <div>No Image Card</div>
+            <div><p>This card has no image column — useful for text-only layouts.</p></div>
+            <div>Explore</div>
+            <div>https://www.adobe.com</div>
+            <div>tertiary</div>
+          </div>
+
+      </div>
+    </div>
+  </main>
+  <footer></footer>
+</body>
+</html>

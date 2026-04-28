@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hero Split Block - Local Test</title>
+  <link rel="stylesheet" href="/styles/styles.css">
+  <script src="/scripts/aem.js" type="module"></script>
+  <script src="/scripts/scripts.js" type="module"></script>
+</head>
+<body>
+  <header></header>
+  <main>
+
+    <div>
+      <h2>Image Left (default)</h2>
+      <!-- hero-split: image col first, content col second -->
+      <div class="hero-split">
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Hero image"></picture></div>
+          <div>
+            <p>Innovation at Scale</p>
+            <h1>Build Faster with AEM EDS</h1>
+            <h2>The modern way to deliver content</h2>
+            <p>Adobe Experience Manager Edge Delivery Services lets your team ship performant, author-friendly experiences without compromise.</p>
+            <p><a href="/get-started">Get Started</a> <a href="/learn-more">Learn More</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h2>Image Right (variant)</h2>
+      <!-- hero-split image-right: content col first, image col second -->
+      <div class="hero-split image-right">
+        <div>
+          <div>
+            <p>Trusted by Enterprises</p>
+            <h1>Deliver at the Edge</h1>
+            <h2>Speed meets authoring simplicity</h2>
+            <p>With document-based authoring and edge delivery, your content teams move fast and your users get blazing performance.</p>
+            <p><a href="/start">Start Free</a> <a href="/demo">Watch Demo</a></p>
+          </div>
+          <div><picture><img src="/test/placeholder.svg" alt="Hero image right"></picture></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <footer></footer>
+</body>
+</html>
