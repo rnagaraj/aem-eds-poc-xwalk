@@ -1,0 +1,108 @@
+{
+  "definitions": [
+    {
+      "title": "Hero Split",
+      "id": "hero-split",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Hero Split",
+              "model": "hero-split"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "hero-split",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Image Alt Text",
+          "value": ""
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "imagePosition",
+          "label": "Image Position",
+          "value": "left",
+          "options": [
+            { "name": "Left", "value": "left" },
+            { "name": "Right", "value": "image-right" }
+          ]
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "eyebrow",
+          "label": "Eyebrow",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "title",
+          "label": "Title",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "subtitle",
+          "label": "Subtitle",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "description",
+          "label": "Description",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "primaryCtaLabel",
+          "label": "Primary CTA Label",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "primaryCtaUrl",
+          "label": "Primary CTA URL",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "secondaryCtaLabel",
+          "label": "Secondary CTA Label",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "secondaryCtaUrl",
+          "label": "Secondary CTA URL",
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "filters": []
+}
