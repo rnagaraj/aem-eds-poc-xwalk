@@ -1,0 +1,83 @@
+/* Video embed */
+.video-embed-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.video-embed-wrapper iframe,
+.video-embed-wrapper video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Transcript section */
+.video-transcript {
+  border: 1px solid #dadada;
+  border-top: none;
+}
+
+/* Toggle button */
+.video-transcript-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 20px;
+  background: var(--light-color, #f8f8f8);
+  border: none;
+  cursor: pointer;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-color, #131313);
+  text-align: left;
+  transition: background-color 0.2s ease;
+}
+
+.video-transcript-toggle:hover {
+  background-color: #ebebeb;
+}
+
+/* Chevron icon */
+.video-transcript-icon {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid currentcolor;
+  border-bottom: 2px solid currentcolor;
+  transform: rotate(45deg);
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.video-transcript-toggle[aria-expanded="true"] .video-transcript-icon {
+  transform: rotate(-135deg);
+}
+
+/* Transcript content */
+.video-transcript-content {
+  padding: 20px;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--text-color, #131313);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.video-transcript-content[hidden] {
+  display: none;
+}
+
+.video-transcript-content p {
+  margin: 0 0 12px;
+}
+
+.video-transcript-content p:last-child {
+  margin-bottom: 0;
+}
