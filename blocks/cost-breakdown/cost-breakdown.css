@@ -4,10 +4,13 @@
   flex-direction: column;
   align-items: center;
   gap: 32px;
+  width: 100%;
+  min-height: 300px;
   background-color: #1a3a6b;
   border-radius: 0 16px 16px 0;
   padding: 40px 32px;
   color: #fff;
+  box-sizing: border-box;
 }
 
 /* Desktop: side by side */
@@ -23,6 +26,8 @@
 /* --- Image --- */
 .cost-breakdown-image {
   flex: 0 0 auto;
+  width: 220px;
+  height: 220px;
 }
 
 .cost-breakdown-image picture,
@@ -35,6 +40,11 @@
 }
 
 @media (width >= 900px) {
+  .cost-breakdown-image {
+    width: 260px;
+    height: 260px;
+  }
+
   .cost-breakdown-image picture,
   .cost-breakdown-image img {
     width: 260px;
@@ -70,7 +80,7 @@
   align-items: center;
   padding: 10px 0;
   font-size: 0.9375rem;
-  color: rgb(255 255 255 / 88%);
+  color: #fff;
   gap: 16px;
 }
 
