@@ -1,49 +1,75 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
-function getCol(cols, prop, index) {
-  return cols.find((c) => c.dataset.aueProp === prop)
-    || (cols[index] && !cols[index].dataset.aueProp ? cols[index] : null);
+function getCell(rows, prop) {
+  const row = rows.find((r) => r.firstElementChild?.dataset.aueProp === prop);
+  return row ? row.firstElementChild : null;
 }
 
 export default function decorate(block) {
-  const row = block.firstElementChild;
-  const cols = [...row.children];
+  const rows = [...block.children];
+  const isUEMode = rows.some((r) => r.firstElementChild?.dataset.aueProp);
 
-  // In UE: cols are identified by data-aue-prop.
-  // On live page: positional fallback — col 0 = image, col 1 = content.
-  const imageCol = cols.find((c) => c.querySelector('picture'))
-    || getCol(cols, 'image', 0);
-  const contentCol = cols.find((c) => !c.querySelector('picture'))
-    || getCol(cols, null, 1);
+  let imageCell;
+  let imagePositionCell;
+  let eyebrowCell;
+  let titleCell;
+  let subtitleCell;
+  let descCell;
+  let primaryLabelCell;
+  let primaryUrlCell;
+  let secondaryLabelCell;
+  let secondaryUrlCell;
 
-  // Read structured fields (UE model) by data-aue-prop, fall back to positional children
-  const contentChildren = contentCol ? [...contentCol.children] : [];
+  if (isUEMode) {
+    imageCell = getCell(rows, 'image');
+    imagePositionCell = getCell(rows, 'imagePosition');
+    eyebrowCell = getCell(rows, 'eyebrow');
+    titleCell = getCell(rows, 'title');
+    subtitleCell = getCell(rows, 'subtitle');
+    descCell = getCell(rows, 'description');
+    primaryLabelCell = getCell(rows, 'primaryCtaLabel');
+    primaryUrlCell = getCell(rows, 'primaryCtaUrl');
+    secondaryLabelCell = getCell(rows, 'secondaryCtaLabel');
+    secondaryUrlCell = getCell(rows, 'secondaryCtaUrl');
+  } else {
+    // Live page: empty fields are omitted by AEM, so detect by content type.
+    imageCell = rows.find((r) => r.querySelector('picture'))?.firstElementChild;
+    const nonImageRows = rows.filter((r) => !r.querySelector('picture'));
+    const posRow = nonImageRows.find((r) => ['left', 'image-right'].includes(r.textContent.trim()));
+    imagePositionCell = posRow?.firstElementChild;
+    const contentRows = nonImageRows.filter((r) => r !== posRow);
 
-  const getField = (prop, fallbackEl) => {
-    const el = contentCol?.querySelector(`[data-aue-prop="${prop}"]`);
-    return el || fallbackEl;
-  };
+    // CTA URL rows contain an <a>; the row immediately before each is the label.
+    const ctaUrlIndices = contentRows.reduce((acc, r, i) => {
+      if (r.querySelector('a')) acc.push(i);
+      return acc;
+    }, []);
+    const [priUrlIdx, secUrlIdx] = ctaUrlIndices;
+    primaryUrlCell = priUrlIdx != null ? contentRows[priUrlIdx]?.firstElementChild : null;
+    primaryLabelCell = priUrlIdx > 0 ? contentRows[priUrlIdx - 1]?.firstElementChild : null;
+    secondaryUrlCell = secUrlIdx != null ? contentRows[secUrlIdx]?.firstElementChild : null;
+    secondaryLabelCell = secUrlIdx > 0 ? contentRows[secUrlIdx - 1]?.firstElementChild : null;
 
-  // Positional fallback elements from content column
-  const [eyebrowEl, titleEl, subtitleEl, descEl, ctaEl] = contentChildren;
+    // Text rows before the first CTA label: eyebrow?(opt) title subtitle?(opt) description?(opt)
+    const firstCtaLabelIdx = priUrlIdx != null ? priUrlIdx - 1 : contentRows.length;
+    const textRows = contentRows.slice(0, firstCtaLabelIdx);
+    [eyebrowCell, titleCell, subtitleCell, descCell] = textRows.map((r) => r.firstElementChild);
+  }
+
+  // Apply image-position variant before clearing DOM
+  const imagePositionVal = imagePositionCell?.textContent.trim();
+  const imageRight = imagePositionVal === 'image-right' || block.classList.contains('image-right');
+  if (imageRight) block.classList.add('image-right');
 
   block.textContent = '';
-
-  // Apply image-position variant from UE select field or existing block class
-  const imagePositionCol = cols.find((c) => c.dataset.aueProp === 'imagePosition');
-  if (imagePositionCol) {
-    const val = imagePositionCol.textContent.trim();
-    if (val && val !== 'left') block.classList.add(val);
-  }
-  const imageRight = block.classList.contains('image-right');
 
   // --- Image ---
   const imageEl = document.createElement('div');
   imageEl.className = 'hero-split-image';
-  if (imageCol) {
-    moveInstrumentation(imageCol, imageEl);
-    const pic = imageCol.querySelector('picture');
+  if (imageCell) {
+    moveInstrumentation(imageCell, imageEl);
+    const pic = imageCell.querySelector('picture');
     if (pic) {
       const img = pic.querySelector('img');
       if (img.src.endsWith('.svg')) {
@@ -62,79 +88,71 @@ export default function decorate(block) {
   // --- Content ---
   const contentEl = document.createElement('div');
   contentEl.className = 'hero-split-content';
-  if (contentCol) moveInstrumentation(contentCol, contentEl);
 
-  // Eyebrow
-  const eyebrow = getField('eyebrow', eyebrowEl);
-  if (eyebrow?.textContent.trim()) {
-    const div = document.createElement('p');
-    div.className = 'hero-split-eyebrow';
-    div.textContent = eyebrow.textContent.trim();
-    contentEl.append(div);
+  if (eyebrowCell?.textContent.trim()) {
+    const p = document.createElement('p');
+    p.className = 'hero-split-eyebrow';
+    moveInstrumentation(eyebrowCell, p);
+    p.textContent = eyebrowCell.textContent.trim();
+    contentEl.append(p);
   }
 
-  // Title
-  const title = getField('title', titleEl);
-  if (title?.textContent.trim()) {
+  if (titleCell?.textContent.trim()) {
     const h1 = document.createElement('h1');
     h1.className = 'hero-split-title';
-    h1.textContent = title.textContent.trim();
+    moveInstrumentation(titleCell, h1);
+    h1.textContent = titleCell.textContent.trim();
     contentEl.append(h1);
   }
 
-  // Subtitle
-  const subtitle = getField('subtitle', subtitleEl);
-  if (subtitle?.textContent.trim()) {
+  if (subtitleCell?.textContent.trim()) {
     const h2 = document.createElement('h2');
     h2.className = 'hero-split-subtitle';
-    h2.textContent = subtitle.textContent.trim();
+    moveInstrumentation(subtitleCell, h2);
+    h2.textContent = subtitleCell.textContent.trim();
     contentEl.append(h2);
   }
 
-  // Description
-  const desc = getField('description', descEl);
-  if (desc && desc.children.length) {
+  if (descCell?.children.length) {
     const div = document.createElement('div');
     div.className = 'hero-split-description';
-    while (desc.firstChild) div.append(desc.firstChild);
+    moveInstrumentation(descCell, div);
+    while (descCell.firstChild) div.append(descCell.firstChild);
     contentEl.append(div);
   }
 
   // CTAs
-  const primaryLabel = getField('primaryCtaLabel', null)?.textContent.trim();
-  const primaryUrl = getField('primaryCtaUrl', null)?.textContent.trim();
-  const secondaryLabel = getField('secondaryCtaLabel', null)?.textContent.trim();
-  const secondaryUrl = getField('secondaryCtaUrl', null)?.textContent.trim();
+  const primaryLabel = primaryLabelCell?.textContent.trim();
+  const primaryUrl = primaryUrlCell?.querySelector('a')?.href
+    || primaryUrlCell?.textContent.trim();
+  const secondaryLabel = secondaryLabelCell?.textContent.trim();
+  const secondaryUrl = secondaryUrlCell?.querySelector('a')?.href
+    || secondaryUrlCell?.textContent.trim();
 
-  // Fallback: read CTAs from links in the last content column child
-  const ctaLinks = ctaEl?.querySelectorAll('a') || [];
-  const resolvedPrimaryLabel = primaryLabel || ctaLinks[0]?.textContent.trim();
-  const resolvedPrimaryUrl = primaryUrl || ctaLinks[0]?.href;
-  const resolvedSecondaryLabel = secondaryLabel || ctaLinks[1]?.textContent.trim();
-  const resolvedSecondaryUrl = secondaryUrl || ctaLinks[1]?.href;
-
-  if (resolvedPrimaryLabel && resolvedPrimaryUrl) {
+  if (primaryLabel && primaryUrl) {
     const ctaRow = document.createElement('p');
     ctaRow.className = 'hero-split-ctas';
 
     const primary = document.createElement('a');
-    primary.href = resolvedPrimaryUrl;
-    primary.textContent = resolvedPrimaryLabel;
+    primary.href = primaryUrl;
+    primary.textContent = primaryLabel;
     primary.classList.add('hero-split-cta', 'hero-split-cta-primary');
+    if (primaryLabelCell) moveInstrumentation(primaryLabelCell, primary);
     ctaRow.append(primary);
 
-    if (resolvedSecondaryLabel && resolvedSecondaryUrl) {
+    if (secondaryLabel && secondaryUrl) {
       const secondary = document.createElement('a');
-      secondary.href = resolvedSecondaryUrl;
-      secondary.textContent = resolvedSecondaryLabel;
+      secondary.href = secondaryUrl;
+      secondary.textContent = secondaryLabel;
       secondary.classList.add('hero-split-cta', 'hero-split-cta-secondary');
+      if (secondaryLabelCell) moveInstrumentation(secondaryLabelCell, secondary);
       ctaRow.append(secondary);
     }
 
     contentEl.append(ctaRow);
   }
 
-  // --- Assemble in correct order ---
+  // --- Assemble ---
   block.append(imageRight ? contentEl : imageEl);
   block.append(imageRight ? imageEl : contentEl);
 }

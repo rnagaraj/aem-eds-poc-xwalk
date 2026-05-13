@@ -44,6 +44,12 @@
     ]
   },
   {
+    "id": "cost-breakdown",
+    "components": [
+      "cost-breakdown-item"
+    ]
+  },
+  {
     "id": "journey",
     "components": [
       "journey-step"
