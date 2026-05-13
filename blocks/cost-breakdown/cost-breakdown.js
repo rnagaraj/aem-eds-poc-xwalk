@@ -60,8 +60,6 @@ export default function decorate(block) {
   const variantVal = variantCell?.textContent.trim();
   if (variantVal && variantVal !== 'default') block.classList.add(variantVal);
 
-  block.textContent = '';
-
   // --- Image ---
   const imageEl = document.createElement('div');
   imageEl.className = 'cost-breakdown-image';
@@ -102,7 +100,9 @@ export default function decorate(block) {
     const amount = amountCell?.textContent.trim();
     if (!label && !amount) return;
     const li = buildItem(label || '', amount || '');
-    moveInstrumentation(row, li);
+    // In UE mode, keep data-aue-* on the source row (not the visual li) so UE
+    // content tree can find the item. In live mode, move instrumentation to li.
+    if (!isUEMode) moveInstrumentation(row, li);
     itemsEl.append(li);
   });
 
@@ -124,11 +124,16 @@ export default function decorate(block) {
     contentEl.append(totalEl);
   }
 
-  block.append(imageEl, contentEl);
-
-  // In UE mode, re-append original child item rows so UE content tree
-  // can find them after block.textContent cleared them from the DOM.
   if (isUEMode) {
-    lineItemRows.forEach((row) => block.append(row));
+    // Remove only parent-prop rows; leave item rows in place so UE's
+    // MutationObserver never sees them disappear from the DOM.
+    [imageCell, headingCell, totalLabelCell, totalAmountCell, variantCell].forEach((cell) => {
+      cell?.parentElement?.remove();
+    });
+    block.prepend(contentEl);
+    block.prepend(imageEl);
+  } else {
+    block.textContent = '';
+    block.append(imageEl, contentEl);
   }
 }
