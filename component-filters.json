@@ -13,8 +13,12 @@
       "button",
       "title",
       "hero",
+      "hero-split",
       "cards",
       "columns",
+      "cost-breakdown",
+      "journey",
+      "video",
       "fragment"
     ]
   },
