@@ -1,0 +1,23 @@
+/* Article template — constrained reading width with centered layout */
+body.article main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+body.article main h1 {
+  font-size: var(--heading-font-size-xl);
+  margin-bottom: 8px;
+}
+
+body.article main p {
+  font-size: var(--body-font-size-m);
+  line-height: 1.8;
+  color: var(--dark-color);
+}
+
+@media (width >= 900px) {
+  body.article main {
+    padding: 60px 40px;
+  }
+}

@@ -1,0 +1,10 @@
+/* Landing page template — hides header and footer for full-page experiences */
+body.landing header,
+body.landing footer {
+  display: none;
+}
+
+body.landing main {
+  margin: 0;
+  padding: 0;
+}

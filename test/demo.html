@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AEM EDS Demo Page</title>
+  <!-- Page metadata — change template/theme values to test different layouts/styles -->
+  <!-- template options: landing, article  (leave empty for default) -->
+  <!-- theme options: dark, blue  (leave empty for default) -->
+  <meta name="template" content="">
+  <meta name="theme" content="white">
+  <meta name="footer" content="/test/footers/demo-footer">
+  <meta name="description" content="AEM Edge Delivery Services proof-of-concept demo page.">
+  <meta property="og:title" content="Build Faster with AEM EDS">
+  <meta property="og:description" content="Adobe Experience Manager Edge Delivery Services demo.">
+  <link rel="stylesheet" href="/styles/styles.css">
+  <script src="/scripts/aem.js" type="module"></script>
+  <script src="/scripts/scripts.js" type="module"></script>
+</head>
+<body>
+  <header></header>
+  <main>
+
+    <!-- ═══════════════════════════════════════════
+         1. HERO SPLIT — Image Left (default)
+         Moved first so h1 is the first heading on page
+    ════════════════════════════════════════════ -->
+    <div>
+      <div class="hero-split">
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Hero image"></picture></div>
+          <div>
+            <p>Innovation at Scale</p>
+            <h1>Build Faster with AEM EDS</h1>
+            <h2>The modern way to deliver content</h2>
+            <p>Adobe Experience Manager Edge Delivery Services lets your team ship performant, author-friendly experiences without compromise.</p>
+            <p><a href="/get-started">Get Started with AEM EDS</a> <a href="/learn-more">Learn More About AEM EDS</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         2. CAROUSEL
+    ════════════════════════════════════════════ -->
+    <div>
+      <div class="carousel">
+
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Slide 1 — Technology"></picture></div>
+          <div>Technology</div>
+          <div>Getting Started with AEM EDS</div>
+          <div><p>Learn how to build fast, author-friendly sites using Adobe Experience Manager Edge Delivery Services.</p></div>
+          <div>Read the Getting Started Guide</div>
+          <div>https://www.adobe.com</div>
+          <div>primary</div>
+        </div>
+
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Slide 2 — Design"></picture></div>
+          <div>Design</div>
+          <div>Styling Your Blocks</div>
+          <div><p>Explore how CSS custom properties enable per-site theming without touching component code.</p></div>
+          <div>Learn More About Block Styling</div>
+          <div>https://www.adobe.com</div>
+          <div>secondary</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         3. COST BREAKDOWN — Default (no dividers)
+    ════════════════════════════════════════════ -->
+    <div>
+      <div class="cost-breakdown">
+        <div>
+          <div>
+            <picture><img src="/test/placeholder.svg" alt="Cyclist injured in a bike accident"></picture>
+          </div>
+          <div>
+            <h3>Unexpected cost</h3>
+            <p>Transportation to hospital | $300</p>
+            <p>Emergency room visit | $150</p>
+            <p>Medical testing | $200</p>
+            <p>Concussion injury | $400</p>
+            <p>Anesthesia | $6,100</p>
+            <p>Medical equipment | $100</p>
+            <p>Physical rehabilitation | $250</p>
+            <p><strong>Total benefit paid | $7,500</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         4. JOURNEY
+    ════════════════════════════════════════════ -->
+    <div>
+      <div class="journey">
+
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Jesse riding a bicycle"></picture></div>
+          <div><p>Jesse was seriously injured in a bike accident.</p></div>
+          <div></div>
+          <div></div>
+        </div>
+
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Ambulance rushing to hospital"></picture></div>
+          <div><p>An ambulance rushed him to the hospital.</p></div>
+          <div>Transportation to hospital</div>
+          <div>$300</div>
+        </div>
+
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Emergency room at hospital"></picture></div>
+          <div><p>He was evaluated for multiple injuries.</p></div>
+          <div>Emergency room visit</div>
+          <div>$150</div>
+        </div>
+
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Diagnostic testing equipment"></picture></div>
+          <div><p>Jesse underwent advanced diagnostic tests.</p></div>
+          <div>Medical testing</div>
+          <div>$200</div>
+        </div>
+
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Doctor reviewing diagnosis"></picture></div>
+          <div><p>The doctor diagnosed a concussion.</p></div>
+          <div>Concussion injury</div>
+          <div>$400</div>
+        </div>
+
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Patient in recovery"></picture></div>
+          <div><p>Click on each pin to see the benefit payment.</p></div>
+          <div></div>
+          <div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         5. VIDEO
+    ════════════════════════════════════════════ -->
+    <div>
+      <div class="video">
+
+        <div>
+          <div><a href="https://www.youtube.com/watch?v=K4TOrB7at0Y">AEM Edge Delivery Services — Developer Overview</a></div>
+        </div>
+
+        <div>
+          <div>
+            <p>[00:00] In this video, we cover how AEM Edge Delivery Services works from a developer's perspective.</p>
+            <p>[00:15] Edge Delivery Services uses a file-based authoring model where content lives in SharePoint or Google Drive.</p>
+            <p>[00:30] The platform delivers pages from the edge with near-zero TTFB, scoring 100 on Core Web Vitals out of the box.</p>
+            <p>[00:50] Developers build blocks using plain HTML, CSS, and JavaScript — no framework required.</p>
+            <p>[01:10] Each block exports a single decorate() function that receives the block DOM and transforms it into the final UI.</p>
+            <p>[01:30] The Universal Editor enables WYSIWYG authoring on top of the same block model, bridging document-based and traditional CMS workflows.</p>
+            <p>[01:55] By the end of this video you will understand the project structure, the block pipeline, and how to deploy your first EDS site.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         6. COST BREAKDOWN — Dividers variant
+    ════════════════════════════════════════════ -->
+    <div>
+      <div class="cost-breakdown dividers">
+        <div>
+          <div>
+            <picture><img src="/test/placeholder.svg" alt="Man who suffered a heart attack"></picture>
+          </div>
+          <div>
+            <h3>Unexpected cost</h3>
+            <p>Heart attack initial diagnosis | $30,000</p>
+            <p>Transportation | $100</p>
+            <p>Lodging cost | $500</p>
+            <p>Heart attack second diagnosis | $30,000</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <footer></footer>
+</body>
+</html>

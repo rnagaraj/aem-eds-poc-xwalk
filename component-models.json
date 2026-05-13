@@ -20,6 +20,109 @@
         "name": "keywords",
         "multi": true,
         "label": "Keywords"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "template",
+        "label": "Template",
+        "options": [
+          {
+            "name": "Default",
+            "value": ""
+          },
+          {
+            "name": "Landing Page (no header/footer)",
+            "value": "landing"
+          },
+          {
+            "name": "Article",
+            "value": "article"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "theme",
+        "label": "Theme",
+        "options": [
+          {
+            "name": "Default",
+            "value": ""
+          },
+          {
+            "name": "White (Day)",
+            "value": "white"
+          },
+          {
+            "name": "Dark (Night)",
+            "value": "dark"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "nav",
+        "label": "Nav Override",
+        "description": "Path to a custom nav fragment (e.g. /navs/campaign)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "footer",
+        "label": "Footer Override",
+        "description": "Path to a custom footer fragment (e.g. /footers/ceros)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "og:title",
+        "label": "Social Title (og:title)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "og:description",
+        "label": "Social Description (og:description)"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "og:image",
+        "label": "Social Image (og:image)",
+        "multi": false
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "robots",
+        "label": "Robots",
+        "options": [
+          {
+            "name": "Index, Follow (default)",
+            "value": ""
+          },
+          {
+            "name": "No Index, No Follow",
+            "value": "noindex, nofollow"
+          },
+          {
+            "name": "No Index",
+            "value": "noindex"
+          },
+          {
+            "name": "No Follow",
+            "value": "nofollow"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "canonical",
+        "label": "Canonical URL"
       }
     ]
   },
@@ -241,12 +344,183 @@
     ]
   },
   {
+    "id": "cost-breakdown",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading",
+        "value": "Unexpected cost"
+      },
+      {
+        "component": "container",
+        "name": "items",
+        "label": "Line Items",
+        "collapsible": true,
+        "fields": [
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "label",
+            "label": "Description",
+            "value": ""
+          },
+          {
+            "component": "text",
+            "valueType": "string",
+            "name": "amount",
+            "label": "Amount",
+            "value": ""
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "totalLabel",
+        "label": "Total Label",
+        "value": "Total benefit paid:"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "totalAmount",
+        "label": "Total Amount",
+        "value": ""
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "variant",
+        "label": "Variant",
+        "value": "default",
+        "options": [
+          {
+            "name": "Default (no dividers)",
+            "value": "default"
+          },
+          {
+            "name": "Dividers (yellow lines between rows)",
+            "value": "dividers"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "fragment",
     "fields": [
       {
         "component": "aem-content",
         "name": "reference",
         "label": "Reference"
+      }
+    ]
+  },
+  {
+    "id": "hero-split",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "imagePosition",
+        "label": "Image Position",
+        "value": "left",
+        "options": [
+          {
+            "name": "Left",
+            "value": "left"
+          },
+          {
+            "name": "Right",
+            "value": "image-right"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "eyebrow",
+        "label": "Eyebrow",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "subtitle",
+        "label": "Subtitle",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "primaryCtaLabel",
+        "label": "Primary CTA Label",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "primaryCtaUrl",
+        "label": "Primary CTA URL",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "secondaryCtaLabel",
+        "label": "Secondary CTA Label",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "secondaryCtaUrl",
+        "label": "Secondary CTA URL",
+        "value": ""
       }
     ]
   },
@@ -273,6 +547,85 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "journey",
+    "fields": []
+  },
+  {
+    "id": "journey-step",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Illustration",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Step Description",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "benefitLabel",
+        "label": "Benefit Label (shows $ pin if set)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "benefitAmount",
+        "label": "Benefit Amount",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "video",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "videoUrl",
+        "label": "Video URL",
+        "description": "YouTube, Vimeo, Scene7, or AEM DAM video URL",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "transcript",
+        "label": "Transcript",
+        "description": "Full video transcript shown via the 'View transcript' toggle",
+        "value": ""
       }
     ]
   }

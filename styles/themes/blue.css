@@ -1,0 +1,23 @@
+/* Blue theme overrides */
+:root {
+  --link-color: #0057b8;
+  --link-hover-color: #003f8a;
+  --background-color: #f0f6ff;
+  --light-color: #ddeeff;
+  --dark-color: #1a3a6b;
+  --text-color: #0a1a3a;
+}
+
+body.blue {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+body.blue header {
+  background-color: #0057b8;
+  color: #fff;
+}
+
+body.blue header a {
+  color: #fff;
+}
