@@ -1,8 +1,6 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
-const PARENT_PROPS = new Set(['image', 'heading', 'totalLabel', 'totalAmount', 'variant']);
-
 function buildItem(label, amount) {
   const li = document.createElement('li');
   li.className = 'cost-breakdown-item';
@@ -30,7 +28,7 @@ export default function decorate(block) {
   const lineItemRows = [];
 
   if (isUEMode) {
-    // In UE: parent fields are single cells with data-aue-prop in PARENT_PROPS.
+    // In UE: parent fields are single cells with known data-aue-prop names.
     // Child item rows have cells with data-aue-prop "label" / "amount".
     rows.forEach((row) => {
       const prop = row.firstElementChild?.dataset?.aueProp;
