@@ -127,4 +127,10 @@ export default function decorate(block) {
   }
 
   block.append(imageEl, contentEl);
+
+  // In UE mode, re-append original child item rows so UE content tree
+  // can find them after block.textContent cleared them from the DOM.
+  if (isUEMode) {
+    lineItemRows.forEach((row) => block.append(row));
+  }
 }

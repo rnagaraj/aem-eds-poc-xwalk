@@ -123,3 +123,8 @@
   border-top: none;
   padding-top: 10px;
 }
+
+/* Hide re-appended UE source rows — they exist for UE content tree only */
+.cost-breakdown > div:not(.cost-breakdown-image):not(.cost-breakdown-content) {
+  display: none;
+}
