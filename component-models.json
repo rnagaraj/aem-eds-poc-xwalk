@@ -424,6 +424,29 @@
     ]
   },
   {
+    "id": "modal",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "name",
+        "label": "Modal Name (referenced in CTA links as #name)"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "contentLeft",
+        "label": "Content — Left"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "contentRight",
+        "label": "Content — Right"
+      }
+    ]
+  },
+  {
     "id": "snapshot",
     "fields": [
       {
