@@ -15,13 +15,18 @@ function buildItem(label, amount) {
 }
 
 function parseItems(cell) {
-  return [...cell.querySelectorAll('p')]
-    .map((p) => p.textContent.trim())
+  const paragraphs = [...cell.querySelectorAll('p')];
+  const rawLines = paragraphs.length
+    ? paragraphs.map((p) => p.textContent)
+    : [cell.textContent];
+  return rawLines
+    .flatMap((text) => text.split('\n'))
+    .map((line) => line.trim())
     .filter(Boolean)
     .map((line) => {
-      const sep = line.indexOf(' | ');
-      return sep !== -1
-        ? { label: line.slice(0, sep), amount: line.slice(sep + 3) }
+      const match = line.match(/^(.*?)\s*\|\s*(.+)$/);
+      return match
+        ? { label: match[1].trim(), amount: match[2].trim() }
         : { label: line, amount: '' };
     });
 }
