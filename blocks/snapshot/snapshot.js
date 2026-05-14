@@ -136,8 +136,8 @@ export default function decorate(block) {
   if (isUEMode) {
     [imageCell, headingCell, itemsCell, totalLabelCell, totalAmountCell, variantCell]
       .forEach((cell) => {
-      cell?.parentElement?.remove();
-    });
+        cell?.parentElement?.remove();
+      });
     block.prepend(contentEl);
     block.prepend(imageEl);
   } else {
