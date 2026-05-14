@@ -85,14 +85,14 @@
           "valueType": "string",
           "name": "label",
           "label": "Description",
-          "value": ""
+          "value": "Item"
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "amount",
           "label": "Amount",
-          "value": ""
+          "value": "$0"
         }
       ]
     }
