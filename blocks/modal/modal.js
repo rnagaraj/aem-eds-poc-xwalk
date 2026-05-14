@@ -73,7 +73,8 @@ export default function decorate(block) {
     while (rightCell.firstChild) rightEl.append(rightCell.firstChild);
   }
 
-  contentEl.append(leftEl, rightEl);
+  contentEl.append(leftEl);
+  if (rightEl.textContent.trim()) contentEl.append(rightEl);
 
   // --- Close button ---
   const closeBtn = document.createElement('button');
