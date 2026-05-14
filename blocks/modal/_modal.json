@@ -21,7 +21,7 @@
       "id": "modal",
       "fields": [
         {
-          "component": "text",
+          "component": "richtext",
           "valueType": "string",
           "name": "modalId",
           "label": "Modal ID (used in CTA links as #modal-id)"

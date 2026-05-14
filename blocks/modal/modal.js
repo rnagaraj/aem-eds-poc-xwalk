@@ -49,13 +49,10 @@ export default function decorate(block) {
       else if (prop === 'contentRight') rightCell = row.firstElementChild;
     });
   } else {
-    const cells = rows
+    // All three fields are richtext — AEM always renders them, so positional is safe
+    [modalIdCell, leftCell, rightCell] = rows
       .filter((r) => r.children.length === 1)
       .map((r) => r.firstElementChild);
-    // modalId is a plain-text field (no block-level children); content fields are richtext
-    modalIdCell = cells.find((c) => !c.querySelector('p, ul, ol, h1, h2, h3, h4'));
-    const contentCells = cells.filter((c) => c.querySelector('p, ul, ol, h1, h2, h3, h4'));
-    [leftCell, rightCell] = contentCells;
   }
 
   const modalId = modalIdCell?.textContent.trim();
