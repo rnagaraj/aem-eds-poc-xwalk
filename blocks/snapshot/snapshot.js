@@ -3,15 +3,27 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 function buildItem(label, amount) {
   const li = document.createElement('li');
-  li.className = 'cost-breakdown-item';
+  li.className = 'snapshot-item';
   const labelEl = document.createElement('span');
-  labelEl.className = 'cost-breakdown-label';
+  labelEl.className = 'snapshot-label';
   labelEl.textContent = label;
   const amountEl = document.createElement('span');
-  amountEl.className = 'cost-breakdown-amount';
+  amountEl.className = 'snapshot-amount';
   amountEl.textContent = amount;
   li.append(labelEl, amountEl);
   return li;
+}
+
+function parseItems(cell) {
+  return [...cell.querySelectorAll('p')]
+    .map((p) => p.textContent.trim())
+    .filter(Boolean)
+    .map((line) => {
+      const sep = line.indexOf(' | ');
+      return sep !== -1
+        ? { label: line.slice(0, sep), amount: line.slice(sep + 3) }
+        : { label: line, amount: '' };
+    });
 }
 
 export default function decorate(block) {
@@ -22,27 +34,25 @@ export default function decorate(block) {
 
   let imageCell;
   let headingCell;
+  let itemsCell;
   let totalLabelCell;
   let totalAmountCell;
   let variantCell;
-  const lineItemRows = [];
 
   if (isUEMode) {
-    // In UE: parent fields are single cells with known data-aue-prop names.
-    // Child item rows have cells with data-aue-prop "label" / "amount".
     rows.forEach((row) => {
       const prop = row.firstElementChild?.dataset?.aueProp;
       if (prop === 'image') imageCell = row.firstElementChild;
       else if (prop === 'heading') headingCell = row.firstElementChild;
+      else if (prop === 'items') itemsCell = row.firstElementChild;
       else if (prop === 'totalLabel') totalLabelCell = row.firstElementChild;
       else if (prop === 'totalAmount') totalAmountCell = row.firstElementChild;
       else if (prop === 'variant') variantCell = row.firstElementChild;
-      else lineItemRows.push(row);
     });
   } else {
-    // Live page: single-cell rows are parent fields; two-cell rows are line items.
+    // Live page: all fields are single-cell rows.
+    // Items row is identified by containing " | " in its text content.
     const singleCellRows = rows.filter((r) => r.children.length === 1);
-    rows.filter((r) => r.children.length >= 2).forEach((r) => lineItemRows.push(r));
 
     const imageRow = singleCellRows.find((r) => r.querySelector('picture'));
     imageCell = imageRow?.firstElementChild;
@@ -50,8 +60,13 @@ export default function decorate(block) {
     const variantRow = singleCellRows.find((r) => ['default', 'dividers'].includes(r.textContent.trim()));
     variantCell = variantRow?.firstElementChild;
 
+    const itemsRow = singleCellRows.find(
+      (r) => r !== imageRow && r !== variantRow && r.textContent.includes(' | '),
+    );
+    itemsCell = itemsRow?.firstElementChild;
+
     const textRows = singleCellRows
-      .filter((r) => r !== imageRow && r !== variantRow)
+      .filter((r) => r !== imageRow && r !== variantRow && r !== itemsRow)
       .map((r) => r.firstElementChild);
     [headingCell, totalLabelCell, totalAmountCell] = textRows;
   }
@@ -62,7 +77,7 @@ export default function decorate(block) {
 
   // --- Image ---
   const imageEl = document.createElement('div');
-  imageEl.className = 'cost-breakdown-image';
+  imageEl.className = 'snapshot-image';
   if (imageCell) {
     moveInstrumentation(imageCell, imageEl);
     const pic = imageCell.querySelector('picture');
@@ -80,31 +95,25 @@ export default function decorate(block) {
 
   // --- Content ---
   const contentEl = document.createElement('div');
-  contentEl.className = 'cost-breakdown-content';
+  contentEl.className = 'snapshot-content';
 
   if (headingCell?.textContent.trim()) {
     const h = document.createElement('h2');
-    h.className = 'cost-breakdown-heading';
+    h.className = 'snapshot-heading';
     moveInstrumentation(headingCell, h);
     h.textContent = headingCell.textContent.trim();
     contentEl.append(h);
   }
 
   const itemsEl = document.createElement('ul');
-  itemsEl.className = 'cost-breakdown-items';
+  itemsEl.className = 'snapshot-items';
 
-  lineItemRows.forEach((row) => {
-    const labelCell = [...row.children].find((c) => c.dataset.aueProp === 'label') || row.children[0];
-    const amountCell = [...row.children].find((c) => c.dataset.aueProp === 'amount') || row.children[1];
-    const label = labelCell?.textContent.trim();
-    const amount = amountCell?.textContent.trim();
-    if (!label && !amount) return;
-    const li = buildItem(label || '', amount || '');
-    // In UE mode, keep data-aue-* on the source row (not the visual li) so UE
-    // content tree can find the item. In live mode, move instrumentation to li.
-    if (!isUEMode) moveInstrumentation(row, li);
-    itemsEl.append(li);
-  });
+  if (itemsCell) {
+    moveInstrumentation(itemsCell, itemsEl);
+    parseItems(itemsCell).forEach(({ label, amount }) => {
+      itemsEl.append(buildItem(label, amount));
+    });
+  }
 
   contentEl.append(itemsEl);
 
@@ -113,21 +122,19 @@ export default function decorate(block) {
   const totalAmount = totalAmountCell?.textContent.trim();
   if (totalLabel || totalAmount) {
     const totalEl = document.createElement('div');
-    totalEl.className = 'cost-breakdown-total';
+    totalEl.className = 'snapshot-total';
     const totalLabelEl = document.createElement('span');
-    totalLabelEl.className = 'cost-breakdown-label';
+    totalLabelEl.className = 'snapshot-label';
     totalLabelEl.textContent = totalLabel || '';
     const totalAmountEl = document.createElement('span');
-    totalAmountEl.className = 'cost-breakdown-amount';
+    totalAmountEl.className = 'snapshot-amount';
     totalAmountEl.textContent = totalAmount || '';
     totalEl.append(totalLabelEl, totalAmountEl);
     contentEl.append(totalEl);
   }
 
   if (isUEMode) {
-    // Remove only parent-prop rows; leave item rows in place so UE's
-    // MutationObserver never sees them disappear from the DOM.
-    [imageCell, headingCell, totalLabelCell, totalAmountCell, variantCell].forEach((cell) => {
+    [imageCell, headingCell, itemsCell, totalLabelCell, totalAmountCell, variantCell].forEach((cell) => {
       cell?.parentElement?.remove();
     });
     block.prepend(contentEl);

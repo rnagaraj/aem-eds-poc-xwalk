@@ -344,7 +344,87 @@
     ]
   },
   {
-    "id": "cost-breakdown",
+    "id": "fragment",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "reference",
+        "label": "Reference"
+      }
+    ]
+  },
+  {
+    "id": "hero",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "journey",
+    "fields": []
+  },
+  {
+    "id": "journey-step",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Illustration",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Step Description",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "benefitLabel",
+        "label": "Benefit Label (shows $ pin if set)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "benefitAmount",
+        "label": "Benefit Amount",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "snapshot",
     "fields": [
       {
         "component": "reference",
@@ -359,6 +439,12 @@
         "name": "heading",
         "label": "Heading",
         "value": "Unexpected cost"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "items",
+        "label": "Items (one per line: Description | $Amount)"
       },
       {
         "component": "text",
@@ -394,36 +480,7 @@
     ]
   },
   {
-    "id": "cost-breakdown-item",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "label",
-        "label": "Description",
-        "value": "Item"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "amount",
-        "label": "Amount",
-        "value": "$0"
-      }
-    ]
-  },
-  {
-    "id": "fragment",
-    "fields": [
-      {
-        "component": "aem-content",
-        "name": "reference",
-        "label": "Reference"
-      }
-    ]
-  },
-  {
-    "id": "hero-split",
+    "id": "split-hero",
     "fields": [
       {
         "component": "reference",
@@ -510,76 +567,6 @@
         "valueType": "string",
         "name": "secondaryCtaUrl",
         "label": "Secondary CTA URL",
-        "value": ""
-      }
-    ]
-  },
-  {
-    "id": "hero",
-    "fields": [
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "image",
-        "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageAlt",
-        "label": "Alt",
-        "value": ""
-      },
-      {
-        "component": "richtext",
-        "name": "text",
-        "value": "",
-        "label": "Text",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "journey",
-    "fields": []
-  },
-  {
-    "id": "journey-step",
-    "fields": [
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "image",
-        "label": "Illustration",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageAlt",
-        "label": "Image Alt Text",
-        "value": ""
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "text",
-        "label": "Step Description",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "benefitLabel",
-        "label": "Benefit Label (shows $ pin if set)",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "benefitAmount",
-        "label": "Benefit Amount",
         "value": ""
       }
     ]

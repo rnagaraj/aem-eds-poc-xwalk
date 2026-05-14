@@ -66,7 +66,7 @@ export default function decorate(block) {
 
   // --- Image ---
   const imageEl = document.createElement('div');
-  imageEl.className = 'hero-split-image';
+  imageEl.className = 'split-hero-image';
   if (imageCell) {
     moveInstrumentation(imageCell, imageEl);
     const pic = imageCell.querySelector('picture');
@@ -87,11 +87,11 @@ export default function decorate(block) {
 
   // --- Content ---
   const contentEl = document.createElement('div');
-  contentEl.className = 'hero-split-content';
+  contentEl.className = 'split-hero-content';
 
   if (eyebrowCell?.textContent.trim()) {
     const p = document.createElement('p');
-    p.className = 'hero-split-eyebrow';
+    p.className = 'split-hero-eyebrow';
     moveInstrumentation(eyebrowCell, p);
     p.textContent = eyebrowCell.textContent.trim();
     contentEl.append(p);
@@ -99,7 +99,7 @@ export default function decorate(block) {
 
   if (titleCell?.textContent.trim()) {
     const h1 = document.createElement('h1');
-    h1.className = 'hero-split-title';
+    h1.className = 'split-hero-title';
     moveInstrumentation(titleCell, h1);
     h1.textContent = titleCell.textContent.trim();
     contentEl.append(h1);
@@ -107,7 +107,7 @@ export default function decorate(block) {
 
   if (subtitleCell?.textContent.trim()) {
     const h2 = document.createElement('h2');
-    h2.className = 'hero-split-subtitle';
+    h2.className = 'split-hero-subtitle';
     moveInstrumentation(subtitleCell, h2);
     h2.textContent = subtitleCell.textContent.trim();
     contentEl.append(h2);
@@ -115,7 +115,7 @@ export default function decorate(block) {
 
   if (descCell?.children.length) {
     const div = document.createElement('div');
-    div.className = 'hero-split-description';
+    div.className = 'split-hero-description';
     moveInstrumentation(descCell, div);
     while (descCell.firstChild) div.append(descCell.firstChild);
     contentEl.append(div);
@@ -131,12 +131,12 @@ export default function decorate(block) {
 
   if (primaryLabel && primaryUrl) {
     const ctaRow = document.createElement('p');
-    ctaRow.className = 'hero-split-ctas';
+    ctaRow.className = 'split-hero-ctas';
 
     const primary = document.createElement('a');
     primary.href = primaryUrl;
     primary.textContent = primaryLabel;
-    primary.classList.add('hero-split-cta', 'hero-split-cta-primary');
+    primary.classList.add('split-hero-cta', 'split-hero-cta-primary');
     if (primaryLabelCell) moveInstrumentation(primaryLabelCell, primary);
     ctaRow.append(primary);
 
@@ -144,7 +144,7 @@ export default function decorate(block) {
       const secondary = document.createElement('a');
       secondary.href = secondaryUrl;
       secondary.textContent = secondaryLabel;
-      secondary.classList.add('hero-split-cta', 'hero-split-cta-secondary');
+      secondary.classList.add('split-hero-cta', 'split-hero-cta-secondary');
       if (secondaryLabelCell) moveInstrumentation(secondaryLabelCell, secondary);
       ctaRow.append(secondary);
     }

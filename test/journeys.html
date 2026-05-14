@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Supplemental Insurance Journeys — Prudential</title>
+  <meta name="template" content="">
+  <meta name="theme" content="">
+  <meta name="footer" content="/test/footers/demo-footer">
+  <meta name="description" content="See how Accident, Critical Illness, and Hospital Indemnity insurance helped real people cover unexpected costs.">
+  <link rel="stylesheet" href="/styles/styles.css">
+  <script src="/scripts/aem.js" type="module"></script>
+  <script src="/scripts/scripts.js" type="module"></script>
+
+  <style>
+    /* ── Journey Tabs ─────────────────────────────── */
+    .journey-tabs-section {
+      padding: 0 0 60px;
+    }
+
+    .journey-tabs-nav {
+      display: flex;
+      gap: 0;
+      border-bottom: 3px solid #e2e8f0;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 0 24px;
+      background: #fff;
+      position: sticky;
+      top: var(--nav-height);
+      z-index: 10;
+    }
+
+    .journey-tabs-nav::-webkit-scrollbar { display: none; }
+
+    .journey-tab-btn {
+      flex: 0 0 auto;
+      padding: 18px 28px;
+      border: none;
+      background: none;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #64748b;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -3px;
+      white-space: nowrap;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .journey-tab-btn.active {
+      color: #1a3a6b;
+      border-bottom-color: #f5c518;
+    }
+
+    .journey-tab-btn:hover:not(.active) {
+      color: #1a3a6b;
+    }
+
+    .journey-tab-panel {
+      display: none;
+    }
+
+    .journey-tab-panel.active {
+      display: block;
+    }
+
+    /* ── Character Intro ──────────────────────────── */
+    .journey-character-intro {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 40px 24px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .journey-character-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 3px solid #f5c518;
+    }
+
+    .journey-character-info {
+      flex: 1;
+    }
+
+    .journey-character-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #1a3a6b;
+      margin: 0 0 4px;
+    }
+
+    .journey-character-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1a3a6b;
+      margin: 0 0 6px;
+    }
+
+    .journey-character-desc {
+      font-size: 0.9375rem;
+      color: #64748b;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ── Claims Process Cards Override ────────────── */
+    .claims-section {
+      background: #f8fafc;
+      padding: 60px 24px;
+    }
+
+    .claims-section h2 {
+      text-align: center;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1a3a6b;
+      margin: 0 0 8px;
+    }
+
+    .claims-section .claims-subtitle {
+      text-align: center;
+      color: #64748b;
+      margin: 0 0 40px;
+      font-size: 1rem;
+    }
+
+    .claims-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .claims-step {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgb(0 0 0 / 7%);
+    }
+
+    .claims-step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #1a3a6b;
+      color: #f5c518;
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin: 0 auto 16px;
+    }
+
+    .claims-step h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1a3a6b;
+      margin: 0 0 8px;
+    }
+
+    .claims-step p {
+      font-size: 0.875rem;
+      color: #64748b;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .claims-cta {
+      text-align: center;
+      margin-top: 36px;
+    }
+
+    .claims-cta a {
+      display: inline-block;
+      padding: 14px 32px;
+      background: #1a3a6b;
+      color: #fff;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.9375rem;
+      transition: background 0.2s ease;
+    }
+
+    .claims-cta a:hover {
+      background: #0f2347;
+    }
+
+    .claims-note {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 0.8125rem;
+      color: #94a3b8;
+    }
+
+    /* ── Disclaimer ───────────────────────────────── */
+    .disclaimer-section {
+      padding: 32px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .disclaimer-section p {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      line-height: 1.6;
+      margin: 0 0 8px;
+    }
+
+    /* ── Section heading ──────────────────────────── */
+    .section-intro {
+      padding: 60px 24px 0;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .section-intro p:first-child {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #1a3a6b;
+      margin: 0 0 8px;
+    }
+
+    .section-intro h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1a3a6b;
+      margin: 0 0 16px;
+    }
+
+    .section-intro p:last-child {
+      font-size: 1rem;
+      color: #64748b;
+      margin: 0 0 32px;
+      line-height: 1.6;
+    }
+
+    @media (width >= 900px) {
+      .journey-tabs-nav {
+        padding: 0 48px;
+        justify-content: center;
+      }
+
+      .journey-character-intro {
+        padding: 48px 48px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header></header>
+  <main>
+
+    <!-- ══════════════════════════════════════════════
+         1. HERO SPLIT
+    ═══════════════════════════════════════════════ -->
+    <div>
+      <div class="split-hero">
+        <div>
+          <div>
+            <picture>
+              <img src="/test/placeholder.svg" alt="Person reviewing supplemental insurance benefits on a phone">
+            </picture>
+          </div>
+          <div>
+            <p>Supplemental Health Insurance</p>
+            <h1>See Benefits in Action</h1>
+            <h2>Real stories. Real coverage. Real peace of mind.</h2>
+            <p>Follow Jesse, Dave, and Sonya through their health events and see exactly how Prudential's supplemental insurance covered costs that primary insurance didn't.</p>
+            <p>
+              <a href="https://www.prudential.com/mybenefits">File a Claim</a>
+              <a href="#journeys">Explore the Journeys</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+         2. SECTION INTRO
+    ═══════════════════════════════════════════════ -->
+    <div id="journeys">
+      <div class="section-intro">
+        <p>Interactive Journeys</p>
+        <h2>What Coverage Looks Like</h2>
+        <p>Select an insurance type below and click the <strong>$</strong> pins along the journey to reveal each benefit payment.</p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+         3. JOURNEY TABS
+    ═══════════════════════════════════════════════ -->
+    <div class="journey-tabs-section">
+
+      <!-- Tab Navigation -->
+      <nav class="journey-tabs-nav" role="tablist" aria-label="Insurance journey types">
+        <button class="journey-tab-btn active" role="tab" aria-selected="true" aria-controls="tab-accident" id="btn-accident">
+          🚴 Accident Insurance
+        </button>
+        <button class="journey-tab-btn" role="tab" aria-selected="false" aria-controls="tab-critical" id="btn-critical">
+          ❤️ Critical Illness Insurance
+        </button>
+        <button class="journey-tab-btn" role="tab" aria-selected="false" aria-controls="tab-hospital" id="btn-hospital">
+          🏥 Hospital Indemnity Insurance
+        </button>
+      </nav>
+
+      <!-- ── TAB 1: Accident Insurance — Jesse ─────── -->
+      <div class="journey-tab-panel active" id="tab-accident" role="tabpanel" aria-labelledby="btn-accident">
+
+        <!-- Character intro -->
+        <div class="journey-character-intro">
+          <img class="journey-character-avatar" src="/test/placeholder.svg" alt="Jesse, age 33">
+          <div class="journey-character-info">
+            <p class="journey-character-eyebrow">Accident Insurance</p>
+            <p class="journey-character-name">Meet Jesse, age 33</p>
+            <p class="journey-character-desc">Jesse suffered a serious bike accident — a broken thigh bone, a concussion, and multiple injuries. Follow his journey from the moment of impact to full recovery, and click each <strong>$</strong> pin to see the benefit paid.</p>
+          </div>
+        </div>
+
+        <!-- Journey timeline -->
+        <div>
+          <div class="journey">
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Jesse riding a bicycle on a trail"></picture></div>
+              <div><p><strong>Jesse was seriously injured in a bike accident.</strong> He broke his thigh bone and suffered a concussion, requiring immediate emergency care.</p></div>
+              <div></div>
+              <div></div>
+            </div>
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Ambulance rushing to hospital"></picture></div>
+              <div><p>An ambulance transported Jesse to the nearest hospital emergency room.</p></div>
+              <div>Transportation to hospital</div>
+              <div>$300</div>
+            </div>
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Emergency room doctors treating Jesse"></picture></div>
+              <div><p>Jesse was evaluated in the emergency room for his multiple injuries.</p></div>
+              <div>Emergency room visit</div>
+              <div>$150</div>
+            </div>
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Diagnostic testing equipment — MRI scanner"></picture></div>
+              <div><p>Advanced diagnostic imaging and testing confirmed the extent of his injuries.</p></div>
+              <div>Medical testing</div>
+              <div>$200</div>
+            </div>
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Doctor reviewing concussion diagnosis"></picture></div>
+              <div><p>The neurologist confirmed a concussion requiring monitoring and treatment.</p></div>
+              <div>Concussion injury</div>
+              <div>$400</div>
+            </div>
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Surgeon performing thigh bone surgery"></picture></div>
+              <div><p>Jesse underwent surgery to repair his broken thigh bone under general anesthesia.</p></div>
+              <div>Anesthesia &amp; broken thigh bone surgery</div>
+              <div>$6,100</div>
+            </div>
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Medical equipment including crutches and brace"></picture></div>
+              <div><p>Jesse was provided with recovery equipment to aid his rehabilitation at home.</p></div>
+              <div>Medical equipment</div>
+              <div>$100</div>
+            </div>
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Physical therapist helping Jesse rehabilitate"></picture></div>
+              <div><p>Jesse completed physical therapy sessions to regain full mobility.</p></div>
+              <div>Physical rehabilitation</div>
+              <div>$250</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Cost breakdown -->
+        <div>
+          <div class="snapshot dividers">
+            <div>
+              <div>
+                <picture><img src="/test/placeholder.svg" alt="Jesse, age 33 — Accident Insurance claimant"></picture>
+              </div>
+              <div>
+                <h3>Unexpected cost breakdown</h3>
+                <p>Transportation to hospital | $300</p>
+                <p>Emergency room visit | $150</p>
+                <p>Medical testing | $200</p>
+                <p>Concussion injury | $400</p>
+                <p>Anesthesia &amp; broken thigh bone surgery | $6,100</p>
+                <p>Medical equipment | $100</p>
+                <p>Physical rehabilitation | $250</p>
+                <p><strong>Total benefit paid | $7,500</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /tab-accident -->
+
+      <!-- ── TAB 2: Critical Illness — Dave ─────────── -->
+      <div class="journey-tab-panel" id="tab-critical" role="tabpanel" aria-labelledby="btn-critical">
+
+        <!-- Character intro -->
+        <div class="journey-character-intro">
+          <img class="journey-character-avatar" src="/test/placeholder.svg" alt="Dave, age 53">
+          <div class="journey-character-info">
+            <p class="journey-character-eyebrow">Critical Illness Insurance</p>
+            <p class="journey-character-name">Meet Dave, age 53</p>
+            <p class="journey-character-desc">Dave experienced chest pains at work that turned out to be a serious heart attack. He needed specialized cardiac care out of state, and his wife travelled with him. Click the <strong>$</strong> pins to see how Critical Illness Insurance helped cover the costs.</p>
+          </div>
+        </div>
+
+        <!-- Journey timeline -->
+        <div>
+          <div class="journey">
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Dave feeling chest pain at his work desk"></picture></div>
+              <div><p><strong>Dave felt severe chest pain at work.</strong> Colleagues called 911 immediately and he was rushed to the hospital.</p></div>
+              <div></div>
+              <div></div>
+            </div>
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Hospital cardiology department"></picture></div>
+              <div><p>Doctors confirmed Dave had suffered a heart attack and admitted him for immediate treatment.</p></div>
+              <div>Heart attack — initial diagnosis</div>
+              <div>$30,000</div>
+            </div>
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Specialized cardiac care facility out of state"></picture></div>
+              <div><p>Dave's cardiologist referred him to a specialized cardiac center out of state for advanced treatment.</p></div>
+              <div></div>
+              <div></div>
+            </div>
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Dave's wife packing luggage to travel with him"></picture></div>
+              <div><p>Dave's wife travelled with him for support. Her hotel accommodation near the facility was covered.</p></div>
+              <div>Lodging cost</div>
+              <div>$500</div>
+            </div>
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Transportation to out-of-state cardiac center"></picture></div>
+              <div><p>Transportation costs for getting Dave and his wife to the out-of-state facility were covered.</p></div>
+              <div>Transportation</div>
+              <div>$100</div>
+            </div>
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Cardiac specialist performing follow-up evaluation"></picture></div>
+              <div><p>A second heart event required follow-up diagnosis and additional cardiac intervention.</p></div>
+              <div>Heart attack — second diagnosis</div>
+              <div>$30,000</div>
+            </div>
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Dave recovering at home with family"></picture></div>
+              <div><p><strong>Dave recovered at home.</strong> The lump-sum benefit allowed him and his wife to focus entirely on recovery — not bills.</p></div>
+              <div></div>
+              <div></div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Cost breakdown -->
+        <div>
+          <div class="snapshot dividers">
+            <div>
+              <div>
+                <picture><img src="/test/placeholder.svg" alt="Dave, age 53 — Critical Illness Insurance claimant"></picture>
+              </div>
+              <div>
+                <h3>Unexpected cost breakdown</h3>
+                <p>Heart attack — initial diagnosis | $30,000</p>
+                <p>Transportation | $100</p>
+                <p>Lodging cost | $500</p>
+                <p>Heart attack — second diagnosis | $30,000</p>
+                <p><strong>Total benefit paid | $60,600</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /tab-critical -->
+
+      <!-- ── TAB 3: Hospital Indemnity — Sonya ──────── -->
+      <div class="journey-tab-panel" id="tab-hospital" role="tabpanel" aria-labelledby="btn-hospital">
+
+        <!-- Character intro -->
+        <div class="journey-character-intro">
+          <img class="journey-character-avatar" src="/test/placeholder.svg" alt="Sonya, age 30">
+          <div class="journey-character-info">
+            <p class="journey-character-eyebrow">Hospital Indemnity Insurance</p>
+            <p class="journey-character-name">Meet Sonya, age 30</p>
+            <p class="journey-character-desc">Sonya welcomed a new baby and spent several days in the hospital. Hospital Indemnity Insurance paid her fixed daily benefits that she used to cover living expenses during her extended unpaid maternity leave.</p>
+          </div>
+        </div>
+
+        <!-- Journey timeline -->
+        <div>
+          <div class="journey">
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Sonya arriving at the hospital for childbirth"></picture></div>
+              <div><p><strong>Sonya was admitted to the hospital</strong> to deliver her baby. Her stay would last several days.</p></div>
+              <div>Hospital admission</div>
+              <div>$1,500</div>
+            </div>
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Sonya in the hospital room with her newborn baby"></picture></div>
+              <div><p>Sonya and her baby were monitored for two days following delivery, with daily benefit payments for each in-hospital day.</p></div>
+              <div>Daily in-hospital stay (2 days × $200)</div>
+              <div>$400</div>
+            </div>
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Medical staff caring for Sonya post-delivery"></picture></div>
+              <div><p>Her physician recommended two additional observation days to ensure both mother and baby were healthy before discharge.</p></div>
+              <div>Hospital confinement (2 additional days × $200)</div>
+              <div>$400</div>
+            </div>
+
+            <div>
+              <div><picture><img src="/test/placeholder.svg" alt="Sonya going home with her newborn"></picture></div>
+              <div><p><strong>Sonya went home</strong> with her newborn. The Hospital Indemnity benefit payment helped her extend her maternity leave without financial stress.</p></div>
+              <div></div>
+              <div></div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Cost breakdown -->
+        <div>
+          <div class="snapshot dividers">
+            <div>
+              <div>
+                <picture><img src="/test/placeholder.svg" alt="Sonya, age 30 — Hospital Indemnity Insurance claimant"></picture>
+              </div>
+              <div>
+                <h3>Unexpected cost breakdown</h3>
+                <p>Hospital admission | $1,500</p>
+                <p>Daily in-hospital stay (2 days × $200) | $400</p>
+                <p>Hospital confinement (2 days × $200) | $400</p>
+                <p><strong>Total benefit paid | $2,300</strong></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /tab-hospital -->
+
+    </div><!-- /journey-tabs-section -->
+
+    <!-- ══════════════════════════════════════════════
+         4. CLAIMS PROCESS
+    ═══════════════════════════════════════════════ -->
+    <div>
+      <div class="claims-section">
+        <h2>3 Steps to Easy Claims Filing</h2>
+        <p class="claims-subtitle">No paper forms. No need to chase down medical records. File in minutes at <strong>prudential.com/mybenefits</strong>.</p>
+
+        <div class="claims-steps">
+
+          <div class="claims-step">
+            <div class="claims-step-number">1</div>
+            <h3>Claim Details</h3>
+            <p>Select the reason for your claim. Describe what happened, when it occurred, and who provided your treatment.</p>
+          </div>
+
+          <div class="claims-step">
+            <div class="claims-step-number">2</div>
+            <h3>Payment &amp; Documentation</h3>
+            <p>Authorize Prudential to contact your doctor directly. No manual record gathering required on your part.</p>
+          </div>
+
+          <div class="claims-step">
+            <div class="claims-step-number">3</div>
+            <h3>Review &amp; Submit</h3>
+            <p>Review your claim details and submit. Track your claim status online and receive payment directly to you.</p>
+          </div>
+
+        </div>
+
+        <div class="claims-cta">
+          <a href="https://www.prudential.com/mybenefits">File a Claim at prudential.com/mybenefits</a>
+        </div>
+        <p class="claims-note">Also available by mail, fax, or phone.</p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+         5. CARDS — Key benefits summary
+    ═══════════════════════════════════════════════ -->
+    <div>
+      <div class="cards">
+        <div>
+          <p>Why Supplemental Insurance</p>
+        </div>
+
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Accident Insurance icon"></picture></div>
+          <div>Accident Insurance</div>
+          <div>Accident Insurance</div>
+          <div><p>Covers a wide range of accidental injuries from fractures to concussions. Benefits are paid directly to you and can be used for any expense.</p></div>
+          <div>Learn More</div>
+          <div>https://www.prudential.com</div>
+          <div>primary</div>
+        </div>
+
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Critical Illness Insurance icon"></picture></div>
+          <div>Critical Illness Insurance</div>
+          <div>Critical Illness Insurance</div>
+          <div><p>Pays a lump-sum benefit upon diagnosis of a covered condition such as a heart attack or stroke. Use it for medical bills, lost income, or everyday expenses.</p></div>
+          <div>Learn More</div>
+          <div>https://www.prudential.com</div>
+          <div>primary</div>
+        </div>
+
+        <div>
+          <div><picture><img src="/test/placeholder.svg" alt="Hospital Indemnity Insurance icon"></picture></div>
+          <div>Hospital Indemnity Insurance</div>
+          <div>Hospital Indemnity Insurance</div>
+          <div><p>Provides fixed daily benefits for each day you are hospitalized. Payments go directly to you — not your provider — to cover any expense you choose.</p></div>
+          <div>Learn More</div>
+          <div>https://www.prudential.com</div>
+          <div>primary</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+         6. DISCLAIMER
+    ═══════════════════════════════════════════════ -->
+    <div>
+      <div class="disclaimer-section">
+        <p>THIS IS AN EXCEPTED BENEFITS POLICY. IT PROVIDES COVERAGE ONLY FOR THE LIMITED BENEFITS OR SERVICES SPECIFIED IN THE POLICY. THIS COVERAGE IS NOT REQUIRED TO COMPLY WITH FEDERAL MARKET REQUIREMENTS FOR HEALTH INSURANCE. THIS COVERAGE IS NOT A SUBSTITUTE FOR MAJOR MEDICAL COVERAGE. LACK OF MAJOR MEDICAL COVERAGE (OR OTHER MINIMUM ESSENTIAL COVERAGE) MAY RESULT IN AN ADDITIONAL PAYMENT WITH YOUR TAXES.</p>
+        <p>Contract Series: 83500, 114774. Issued by The Prudential Insurance Company of America, Newark, NJ. The Prudential Insurance Company of America and its affiliates. © 2025 Prudential Financial, Inc. and its related entities.</p>
+        <p>The benefit examples shown are hypothetical and for illustrative purposes only. Actual benefits paid depend on the specific policy terms, conditions, and coverage purchased.</p>
+      </div>
+    </div>
+
+  </main>
+  <footer></footer>
+
+  <script>
+    // Tab switching
+    document.querySelectorAll('.journey-tab-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('aria-controls');
+
+        // Deactivate all
+        document.querySelectorAll('.journey-tab-btn').forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        document.querySelectorAll('.journey-tab-panel').forEach((p) => {
+          p.classList.remove('active');
+        });
+
+        // Activate clicked
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        document.getElementById(target).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

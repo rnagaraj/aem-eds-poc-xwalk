@@ -1,5 +1,5 @@
 /* Block container */
-.cost-breakdown {
+.snapshot {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +15,7 @@
 
 /* Desktop: side by side */
 @media (width >= 900px) {
-  .cost-breakdown {
+  .snapshot {
     flex-direction: row;
     align-items: center;
     gap: 48px;
@@ -24,14 +24,14 @@
 }
 
 /* --- Image --- */
-.cost-breakdown-image {
+.snapshot-image {
   flex: 0 0 auto;
   width: 220px;
   height: 220px;
 }
 
-.cost-breakdown-image picture,
-.cost-breakdown-image img {
+.snapshot-image picture,
+.snapshot-image img {
   display: block;
   width: 220px;
   height: 220px;
@@ -40,26 +40,26 @@
 }
 
 @media (width >= 900px) {
-  .cost-breakdown-image {
+  .snapshot-image {
     width: 260px;
     height: 260px;
   }
 
-  .cost-breakdown-image picture,
-  .cost-breakdown-image img {
+  .snapshot-image picture,
+  .snapshot-image img {
     width: 260px;
     height: 260px;
   }
 }
 
 /* --- Content --- */
-.cost-breakdown-content {
+.snapshot-content {
   flex: 1;
   min-width: 0;
 }
 
 /* Heading */
-.cost-breakdown-heading {
+.snapshot-heading {
   margin: 0 0 20px;
   font-size: 1.375rem;
   font-weight: 700;
@@ -67,14 +67,14 @@
 }
 
 /* Items list */
-.cost-breakdown-items {
+.snapshot-items {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 /* Each line item */
-.cost-breakdown-item {
+.snapshot-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -84,23 +84,23 @@
   gap: 16px;
 }
 
-.cost-breakdown-label {
+.snapshot-label {
   flex: 1;
 }
 
-.cost-breakdown-amount {
+.snapshot-amount {
   flex: 0 0 auto;
   font-variant-numeric: tabular-nums;
 }
 
 /* Bold item (used for total row inline) */
-.cost-breakdown-item-bold {
+.snapshot-item-bold {
   font-weight: 700;
   color: #fff;
 }
 
 /* --- Total row (separate element below list) --- */
-.cost-breakdown-total {
+.snapshot-total {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -118,23 +118,23 @@
    Block option: "Cost Breakdown (dividers)"
    → adds yellow horizontal line between rows
    ============================================= */
-.cost-breakdown.dividers .cost-breakdown-item {
+.snapshot.dividers .snapshot-item {
   border-bottom: 1.5px solid #c8a800;
 }
 
 /* Last item before total has no bottom border */
-.cost-breakdown.dividers .cost-breakdown-item:last-child {
+.snapshot.dividers .snapshot-item:last-child {
   border-bottom: none;
 }
 
 /* Dividers variant: total separator is already the last item's border,
    so soften the top border on total */
-.cost-breakdown.dividers .cost-breakdown-total {
+.snapshot.dividers .snapshot-total {
   border-top: none;
   padding-top: 10px;
 }
 
 /* Hide re-appended UE source rows — they exist for UE content tree only */
-.cost-breakdown > div:not(.cost-breakdown-image, .cost-breakdown-content) {
+.snapshot > div:not(.snapshot-image, .snapshot-content) {
   display: none;
 }

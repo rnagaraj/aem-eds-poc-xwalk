@@ -48,10 +48,10 @@
         "button",
         "title",
         "hero",
-        "hero-split",
+        "split-hero",
         "cards",
         "columns",
-        "cost-breakdown",
+        "snapshot",
         "journey",
         "video",
         "fragment"
