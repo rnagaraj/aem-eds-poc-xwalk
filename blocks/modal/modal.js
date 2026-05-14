@@ -37,23 +37,29 @@ export default function decorate(block) {
   const rows = [...block.children];
   const isUEMode = rows.some((r) => [...r.children].some((c) => c.dataset.aueProp));
 
-  let nameCell;
+  let modalIdCell;
   let leftCell;
   let rightCell;
 
   if (isUEMode) {
     rows.forEach((row) => {
       const prop = row.firstElementChild?.dataset?.aueProp;
-      if (prop === 'name') nameCell = row.firstElementChild;
+      if (prop === 'modalId') modalIdCell = row.firstElementChild;
       else if (prop === 'contentLeft') leftCell = row.firstElementChild;
       else if (prop === 'contentRight') rightCell = row.firstElementChild;
     });
   } else {
-    [nameCell, leftCell, rightCell] = rows.map((r) => r.firstElementChild);
+    const cells = rows
+      .filter((r) => r.children.length === 1)
+      .map((r) => r.firstElementChild);
+    // modalId is a plain-text field (no block-level children); content fields are richtext
+    modalIdCell = cells.find((c) => !c.querySelector('p, ul, ol, h1, h2, h3, h4'));
+    const contentCells = cells.filter((c) => c.querySelector('p, ul, ol, h1, h2, h3, h4'));
+    [leftCell, rightCell] = contentCells;
   }
 
-  const name = nameCell?.textContent.trim();
-  if (name) block.dataset.modalName = name;
+  const modalId = modalIdCell?.textContent.trim();
+  if (modalId) block.dataset.modalName = modalId;
 
   // --- Content ---
   const contentEl = document.createElement('div');
@@ -102,7 +108,7 @@ export default function decorate(block) {
   if (isUEMode) {
     // Render inline in UE so content is editable without a fixed overlay
     block.classList.add('modal-inline');
-    [nameCell, leftCell, rightCell].forEach((cell) => cell?.parentElement?.remove());
+    [modalIdCell, leftCell, rightCell].forEach((cell) => cell?.parentElement?.remove());
     block.prepend(overlay);
   } else {
     block.setAttribute('hidden', '');

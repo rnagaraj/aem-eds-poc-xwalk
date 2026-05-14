@@ -23,8 +23,8 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "name",
-          "label": "Modal Name (referenced in CTA links as #name)"
+          "name": "modalId",
+          "label": "Modal ID (used in CTA links as #modal-id)"
         },
         {
           "component": "richtext",
