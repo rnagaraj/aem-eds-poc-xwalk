@@ -4,6 +4,11 @@
       "id": "page-metadata",
       "fields": [
         {
+          "component": "tab",
+          "name": "tab-basic",
+          "label": "Basic"
+        },
+        {
           "component": "text",
           "valueType": "string",
           "name": "jcr:title",
@@ -21,6 +26,58 @@
           "name": "keywords",
           "multi": true,
           "label": "Keywords"
+        },
+        {
+          "component": "tab",
+          "name": "tab-seo",
+          "label": "SEO"
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "robots",
+          "label": "Robots",
+          "options": [
+            { "name": "Index, Follow (default)", "value": "" },
+            { "name": "No Index, No Follow", "value": "noindex, nofollow" },
+            { "name": "No Index", "value": "noindex" },
+            { "name": "No Follow", "value": "nofollow" }
+          ]
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "canonical",
+          "label": "Canonical URL"
+        },
+        {
+          "component": "tab",
+          "name": "tab-social",
+          "label": "Social"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "og:title",
+          "label": "Social Title (og:title)"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "og:description",
+          "label": "Social Description (og:description)"
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "og:image",
+          "label": "Social Image (og:image)",
+          "multi": false
+        },
+        {
+          "component": "tab",
+          "name": "tab-advanced",
+          "label": "Advanced"
         },
         {
           "component": "select",
@@ -57,43 +114,6 @@
           "name": "footer",
           "label": "Footer Override",
           "description": "Path to a custom footer fragment (e.g. /footers/ceros)"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "og:title",
-          "label": "Social Title (og:title)"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "og:description",
-          "label": "Social Description (og:description)"
-        },
-        {
-          "component": "reference",
-          "valueType": "string",
-          "name": "og:image",
-          "label": "Social Image (og:image)",
-          "multi": false
-        },
-        {
-          "component": "select",
-          "valueType": "string",
-          "name": "robots",
-          "label": "Robots",
-          "options": [
-            { "name": "Index, Follow (default)", "value": "" },
-            { "name": "No Index, No Follow", "value": "noindex, nofollow" },
-            { "name": "No Index", "value": "noindex" },
-            { "name": "No Follow", "value": "nofollow" }
-          ]
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "canonical",
-          "label": "Canonical URL"
         }
       ]
     }
