@@ -427,10 +427,15 @@
     "id": "modal",
     "fields": [
       {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "modalId",
-        "label": "Modal ID (used in CTA links as #modal-id)"
+        "component": "multiselect",
+        "name": "style",
+        "label": "Modal ID",
+        "options": [
+          {
+            "name": "Fracture Modal",
+            "value": "fracture-modal"
+          }
+        ]
       },
       {
         "component": "richtext",

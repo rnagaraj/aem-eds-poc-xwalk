@@ -37,25 +37,26 @@ export default function decorate(block) {
   const rows = [...block.children];
   const isUEMode = rows.some((r) => [...r.children].some((c) => c.dataset.aueProp));
 
-  let modalIdCell;
   let leftCell;
   let rightCell;
 
   if (isUEMode) {
     rows.forEach((row) => {
       const prop = row.firstElementChild?.dataset?.aueProp;
-      if (prop === 'modalId') modalIdCell = row.firstElementChild;
-      else if (prop === 'contentLeft') leftCell = row.firstElementChild;
+      if (prop === 'contentLeft') leftCell = row.firstElementChild;
       else if (prop === 'contentRight') rightCell = row.firstElementChild;
     });
   } else {
-    // All three fields are richtext — AEM always renders them, so positional is safe
-    [modalIdCell, leftCell, rightCell] = rows
+    // style (multiselect) is a CSS class, not a row — only contentLeft and contentRight rows exist
+    [leftCell, rightCell] = rows
       .filter((r) => r.children.length === 1)
       .map((r) => r.firstElementChild);
   }
 
-  const modalId = modalIdCell?.textContent.trim();
+  // Modal ID comes from the 'style' multiselect which AEM appends to block CSS classes
+  const modalId = [...block.classList].find(
+    (c) => !['modal', 'block', 'modal-inline'].includes(c),
+  );
   if (modalId) block.dataset.modalName = modalId;
 
   // --- Content ---
@@ -105,7 +106,7 @@ export default function decorate(block) {
   if (isUEMode) {
     // Render inline in UE so content is editable without a fixed overlay
     block.classList.add('modal-inline');
-    [modalIdCell, leftCell, rightCell].forEach((cell) => cell?.parentElement?.remove());
+    [leftCell, rightCell].forEach((cell) => cell?.parentElement?.remove());
     block.prepend(overlay);
   } else {
     block.setAttribute('hidden', '');
