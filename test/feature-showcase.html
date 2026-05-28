@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feature Showcase Block - Local Test</title>
+  <link rel="stylesheet" href="/styles/styles.css">
+  <script src="/scripts/aem.js" type="module"></script>
+  <script src="/scripts/scripts.js" type="module"></script>
+</head>
+<body>
+  <header></header>
+  <main>
+
+    <!-- ═══════════════════════════════════════════
+         1. DEFAULT — image left, white background
+    ════════════════════════════════════════════ -->
+    <div>
+      <h2>Default (image left)</h2>
+      <!--
+        Row order mirrors the model field order (imageAlt is NOT a row — absorbed into img alt).
+        style multiselect becomes a CSS class, also NOT a row.
+        ctaUrl row must contain <a> so the JS content-type detector identifies it.
+        ctaLabel is the row immediately before ctaUrl.
+      -->
+      <div class="feature-showcase">
+        <div><div><picture><img src="/test/placeholder.svg" alt="EDS block architecture diagram"></picture></div></div>
+        <div><div>Block Architecture</div></div>
+        <div><div>Every UI Component is a Block</div></div>
+        <div><div>
+          <p>In AEM Edge Delivery Services, the entire page is composed of blocks — self-contained units of HTML, CSS, and JavaScript that each export a single <code>decorate()</code> function.</p>
+          <ul>
+            <li>Zero framework dependencies</li>
+            <li>Loaded only when the block is on the page</li>
+            <li>Authored visually in Universal Editor</li>
+          </ul>
+        </div></div>
+        <div><div>Explore the Block Model</div></div>
+        <div><div><a href="/docs/blocks">Explore the Block Model</a></div></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         2. REVERSE — image right
+    ════════════════════════════════════════════ -->
+    <div>
+      <h2>Reverse (image right)</h2>
+      <div class="feature-showcase reverse">
+        <div><div><picture><img src="/test/placeholder.svg" alt="Universal Editor authoring interface"></picture></div></div>
+        <div><div>Universal Editor</div></div>
+        <div><div>WYSIWYG Authoring on the Edge</div></div>
+        <div><div>
+          <p>The Universal Editor bridges document-based and traditional CMS workflows. Content authors edit the live page directly — no staging environments, no publish queues.</p>
+          <ul>
+            <li>In-context editing with instant preview</li>
+            <li>Component properties via the xwalk block model</li>
+            <li>Same block code serves both authoring and delivery</li>
+          </ul>
+        </div></div>
+        <div><div>See Universal Editor in Action</div></div>
+        <div><div><a href="/docs/universal-editor">See Universal Editor in Action</a></div></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         3. HIGHLIGHT — navy content background
+    ════════════════════════════════════════════ -->
+    <div>
+      <h2>Highlight variation (navy background)</h2>
+      <div class="feature-showcase highlight">
+        <div><div><picture><img src="/test/placeholder.svg" alt="Core Web Vitals score dashboard"></picture></div></div>
+        <div><div>Performance</div></div>
+        <div><div>100 Lighthouse Score Out of the Box</div></div>
+        <div><div>
+          <p>EDS delivers pages from the edge with near-zero TTFB. The platform is pre-optimised for Core Web Vitals — no performance budgets to manage, no render-blocking scripts to audit.</p>
+          <ul>
+            <li>Images lazy-loaded and optimised automatically</li>
+            <li>CSS and JS scoped per block — zero unused code</li>
+            <li>Fonts and critical styles inlined at the edge</li>
+          </ul>
+        </div></div>
+        <div><div>Read the Performance Guide</div></div>
+        <div><div><a href="/docs/performance">Read the Performance Guide</a></div></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         4. DARK — dark theme
+    ════════════════════════════════════════════ -->
+    <div>
+      <h2>Dark variation</h2>
+      <div class="feature-showcase dark">
+        <div><div><picture><img src="/test/placeholder.svg" alt="JSON component model schema"></picture></div></div>
+        <div><div>Component Model</div></div>
+        <div><div>Schema-Driven Field Definitions</div></div>
+        <div><div>
+          <p>Block fields are defined in <code>_blockname.json</code> using the xwalk plugin schema. The Universal Editor reads this schema to render the properties panel — no custom UI code required.</p>
+          <ul>
+            <li><code>reference</code> — image asset picker</li>
+            <li><code>richtext</code> — inline rich-text editor</li>
+            <li><code>multiselect</code> named <code>style</code> — appends CSS class variants</li>
+          </ul>
+        </div></div>
+        <div><div>View the Schema Reference</div></div>
+        <div><div><a href="/docs/component-model">View the Schema Reference</a></div></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         5. COMPACT — reduced padding/heading size
+    ════════════════════════════════════════════ -->
+    <div>
+      <h2>Compact variation</h2>
+      <div class="feature-showcase compact">
+        <div><div><picture><img src="/test/placeholder.svg" alt="CTA URL resolution diagram"></picture></div></div>
+        <div><div>CTA Handling</div></div>
+        <div><div>Resolving Links Across Authoring Modes</div></div>
+        <div><div>
+          <p>AEM auto-links plain text URLs in <code>text</code> fields on the live page. The block reads <code>anchor.getAttribute('href')</code> to recover the original authored value — preserving relative paths and hash anchors.</p>
+        </div></div>
+        <div><div>Learn About Link Resolution</div></div>
+        <div><div><a href="/docs/cta">Learn About Link Resolution</a></div></div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         6. COMPACT + HIGHLIGHT — combined variations
+    ════════════════════════════════════════════ -->
+    <div>
+      <h2>Compact + Highlight (combined variations)</h2>
+      <div class="feature-showcase compact highlight">
+        <div><div><picture><img src="/test/placeholder.svg" alt="Content delivery pipeline"></picture></div></div>
+        <div><div>Delivery Pipeline</div></div>
+        <div><div>From Authoring to Edge in Seconds</div></div>
+        <div><div>
+          <p>When an author publishes in Universal Editor, the content is converted to optimised HTML and pushed to the CDN edge nodes — no server-side rendering, no cache warming steps.</p>
+        </div></div>
+        <div><div>Explore the Pipeline</div></div>
+        <div><div><a href="/docs/pipeline">Explore the Pipeline</a></div></div>
+      </div>
+    </div>
+
+  </main>
+  <footer></footer>
+</body>
+</html>
